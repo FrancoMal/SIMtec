@@ -1,0 +1,303 @@
+Bueno, arrancamos. Bueno, gracias por conectarse con la noticia de la difusión de último momento
+de ayer, así que nada, gracias por conectarse. La idea igualmente es, no sé si Maca puestara
+algo, todavía no hablamos nada, pero la semana que viene estamos organizando por ahí de
+coordinar algún, de irnosotros a algunas cátedras, a también dar un poco de información
+al respecto, pero con nuestra reunión de hoy era más general para que se puedan conectar,
+sacarse dudas, y nada, para contarle un poco lo que estamos haciendo y lo que venimos haciendo.
+Voy a compartir esto con audio. Bueno, bien. Estamos... Esta es la tercera edición del
+For Innovation Challenge. Se hizo una edición, y voy al siguiente. La primera edición del
+For Innovation Challenge, que es una... Planteamos desafíos para estudiantes de ingeniería. Esa
+es la idea, un poco. Y les damos un tiempo que suele ser de más o menos tres semanas para
+que los resuelvan junto con mentores de Ford. Nosotros tenemos ese contacto con mentores de
+Ford, pueden poner en práctica lo que van aprendiendo en la teoría, que es medio uno de los
+motivos por los que surgió el For Innovation Challenge, de tener como un contacto más cercano
+con la industria, inclusive, porque cuando uno piensa en la primera experiencia laboral piensa en
+la pasantilla. Entonces, bueno, esta es como una... Si eres un trailer de uno de lo que hizo una
+pasantilla, es una pequeña experiencia que puedes tener antes con contacto real con la
+industria, con desafíos reales, que están muy buenas. Salieron muy bien las primeras dos
+ediciones para que tengan un poco de contexto. La primera edición la hicimos solamente con la
+UBA. Yo soy ingeniero electrónico de la UBA, entonces lo que hicimos es mantener ahí chico y lo
+hicimos primero como prueba piloto, solo que la UBA salió muy bien, todo muy bueno. Participaron
+33 estudiantes de los cuales hoy más de... Creo que son... Hay cinco pasantes que están en Ford,
+están trabajando que salieron de ahí. Es una de los beneficios que tiene este programa, que
+ya vamos a llegar a eso. Y después la segunda edición fue la edición de manufactura, donde
+planteamos ya cinco desafíos de la planta y participaron cuatro universidades, fueron 80
+participantes, fue bastante más grande. Y uno de los eventos que se hace en el For Innovation
+Challenge, que sumamos en el FIC2, la de segunda edición, es lo que llamamos Triads Day. ¿Qué es el
+Triads Day? Ahí ustedes van a haber trabajado durante tres semanas en sus soluciones y ese día
+vienen a presentar esas soluciones ante un jurado, que suelen ser los gerentes de las áreas y presentan
+sus soluciones. El jurado les da un feedback y con ese feedback, ustedes tienen unas cuatro horas
+más o menos para quedarse acá en Ford trabajando, puliendo las entregas para realizar la entrega final.
+Y eso es un poco lo que les quiero mostrar acá, que fue el FIC2, el evento del FIC2, que ahora está muy bueno.
+Ahí te desmultiaste, Debra. ¿Tenés alguna pregunta?
+Bueno, seguimos. Este evento, como fue todo el día acá, creo que en este vídeo no sé llevar,
+pero como fue todo el día estaba tan intenso, lo que hicimos fue aprovechar el partner que tenemos
+con Red Bull y tuvimos un espacio recreativo bastante copado con simuladores y como así,
+un espacio más para distender y ir a un espacio recreativo. Así que nada, les mostramos el vídeo.
+Bueno, hoy estamos viviendo en Pacheco una edición del FIC2. La idea es por presentar desafíos a los
+estudiantes. Este evento es donde participaron cuatro ciudades, 80 alumnos y esos 80 alumnos
+trabajaron en presentar propuestas para cinco proyectos distintos. ¿Cámonos los proyectos?
+Se fue el audio, chicos, del vídeo. Agarrancó bien, pero ahora se fue.
+Gracias por ver, César. ¿Cuándo me mutí? Entonces, ok, para.
+Entonces, si me sé, le...
+Es donde participaron cuatro universidades, 80 alumnos. Esos 80 alumnos trabajaron en presentar
+propuestas para cinco proyectos distintos. ¿Cámonos los proyectos? Son para las plantas que tenemos dentro de Pacheco.
+Creo que fue una experiencia muy constructiva poder presentarse delante de los mentores,
+gerentes, directora de plantas y todo. Es algo muy enriquecedor.
+Y hoy, muchos nervios, pero bueno, nada, cuando presentamos con los encargados es la verdad que nos
+soltamos y podemos llegar a lo mejor que pudimos. Así, bastante contenta.
+Creo que el trabajo está siendo fortes impresionante porque brinda a gente como yo la oportunidad de
+ponerse en contacto con industrias como ésta, que es una industria impresionante para, bueno,
+después desarrollarse profesionalmente y quizás, quién sabe, en el día de mañana, trabajar en
+primera presión en una de estas posiciones como para aportar tu granito de arena a la empresa.
+Lo personal me lleva un montón de aprendizaje, tanto del desafío como de la gente interactuar con
+otros estudiantes, con gente que está muy involucrada en la industria y de esta manera de resolución de problemas.
+Para nosotros es sumamente importante poder generar esta relación con las universidades porque
+es forti en una historia dentro de la Argentina que está muy ligada a la educación, tanto el
+programa con las escuelas rurales como el programa Fordenter. Y obviamente una de las
+ventajas claramente que tiene este proyecto es esa sinárquia que se da entre la prioridad que
+forme la educación y la posibilidad que tienen los estudiantes de poder entrar en contacto con la compañera.
+Bueno ahí, esperemos que haya escuchado bien. Eso fue más o menos un resumen de lo que fue
+ese tragedy del Ford Innovation Challenge 2. Y bueno y acá traemos esta nueva edición que es el
+Ford Innovation Challenge 3 que ahora August le va a contar un poquito. Bueno lo que se diferencia el
+Innovation Challenge 3 a la anterior, lo que venimos a plantear con esta edición es que estaba
+relacionada a inteligencia artificial, siguen siendo de tres desafíos reales en la industria pero lo
+queremos relacionar más con lo que es la inteligencia artificial. Estamos hablando de tres equipos por
+universidad, una para cada desafío que ahora los tutores les van a contar más adelante y tres
+estudiantes por equipo. Estamos hablando de nueve personas por universidad que ahora los chicos les
+pueden contar un poco más. Bien llegamos a los desafíos, por ahí alteramos un poquito el orden así
+los dejo primero. Empezamos por el medio, vamos con el Power Train Intelligence, acá Nico y Cami
+van a ser los mentores de ese desafío así que mejor para aplicar. Bueno la idea es que hoy los
+vehículos están conectados y podemos ver muchos datos y el cliente nos la permite y no sólo
+siempre intentamos buscar mejorar nuestro producto que sea una mejor experiencia para el cliente y
+bueno siempre tengamos la mayor eficiencia y la idea de este desafío es usar estos datos que tenemos
+nosotros a nuestro favor y ver cómo podemos mejorar o captar eventos en los que se pierde
+eficiencia en ley gesta de oxígeno en el motor que puede llegar a que el cliente pueda ver alguna
+baja en esta eficiencia y la idea es poder usar todas las herramientas que tenemos hoy en día,
+inteligencia oficial, machine learning, redes neuronales, lo que quieran, cuanto más innovador
+mejor. Si alguno tiene preguntas se puede desmutear, levantar la mano, lo que sea,
+si no al final igual tenemos el espacio de preguntas también pero bueno sé que acá en
+los desafíos pueden surgir bastantes preguntas por eso lo aclaro. Después tenemos el desafío
+de predictive quality que tenemos a Pablo acá que también va a ser mentor de ese desafío junto a
+Martina que hoy no puedo estar pero van a ser los docentores de ese desafío y Pablo si les
+quiere contar un poquito. Buenas tardes. Este desafío se trata de una forma de aprovechar la
+información que tienen las unidades en su paso por la planta, en ecosistema de distintos sistemas
+de información que confluyen en uno que iban marcando la historia de la unidad a lo largo de
+la planta. Entonces aprovechar toda esa información para flaguear a las unidades al final de la línea
+en pos de profundizar algún tipo de control de calidad para prevenir que algún defecto se
+pueda ir de la planta. Hoy en día tenemos controles que aseguran que esto no ocurre pero la idea de
+esto es predestir la posibilidad de que una unidad tenga un defecto de manera de enfocar los controles
+en busca de esa característica que podría fallar. Entonces es pasar de una calidad reactiva digamos
+algo más predictivo. Ese es el foco de este desafío. Gracias Pablo. Y el otro, el que vuelva
+a uno, pues hicimos el orden al revés, es de customer experience que no tenemos acá,
+que es los mentores de este desafío no pudieron estar hoy, pero la idea es un poco predecir cuáles
+son las posibilidades de que un cliente vuelva a comparar un Ford. Básicamente es basado en datos
+del cliente de ya sea cada cuanto cambia el auto o cada cuanto hace los servicios o hasta
+cuántos clics la en la página web y un montón de otros datos que tiene el equipo poder intentar
+predecir y anticipar que clientes están listos como para elegir un nuevo Ford y bueno eso lo que
+habilita es hacer una estrategia de marketing por ahí más personalizada o enviarle descuentos más
+personalizados y ese estilo de cosas. Entonces estos son los tres desafíos de este Ford Innovations
+Challenge de esta edición. Los tres están orientados en inteligencia artificial, herramientas de
+machine learning y bueno todo lo relacionado y en modelos con distintos como decirlo como con
+distintos focos. Uno es más para experiencia del cliente, el otro es más para la eficiencia,
+mejorar la eficiencia del combustible según el uso del cliente y lo otro es más ya algo de más
+manufactura, más de los controles internos de la planta de calidad. Estos son los tres desafíos
+que hay para elegir, ya van a ver cómo es el proceso pero ustedes van a tener que final un
+formulario donde les hace elegir un desafío y un segundo desafío como segunda opción o segundo
+alternativo. Así que nada, creo que está bueno parar acá si alguien tiene preguntas de los desafíos.
+Adelante, sin miedo ni timidez. Igualmente este material lo vamos a estar poniendo en el
+forums, van a ver que hay un link a un drive donde van a tener toda la información de el
+resumen de estos desafíos pero más detallado, van a tener todo el reglamento, vamos a poner
+esta grabación, así que ahí van a tener todo y también les podemos poner, estaba pensando recién.
+El resumen de lo que fue el FIC2 y el FIC1 porque si lo quieren ver también. Así que van a tener
+toda la información disponible, esto lo vamos a compartir. Bien, calendario. Bueno, yendo a
+el calendario de los eventos, ahora estamos en la primera semana, semana de charlas en la que
+vamos a estar pasando, teniendo estas reuniones quizás con más gente virtuales como estamos
+viendo ahora, con el resto de las universidades, también estamos todavía coordinando pero nos
+gustaría pasar algún día en la semana que viene, como dijo Uli a visitarlos a algunas
+catedras para quizás acercarnos y poder hablar en personas de lo que necesiten. Pusimos el 17 de
+agosto como fecha de cierre de los forums para que ustedes anoten. Hay posibilidades que al
+estar tan sobre la fecha esto se alargue por resto de la semana pero bueno, puede ser que no,
+así que apunten a anotarse antes del 17. Para anotarse, el forums les va a pedir varias preguntas,
+ya van a necesitar tener el grupo de tres personas armadas a diferencia de ediciones anteriores que
+a veces lo formaba la universidad. Después eso les va a pedir un vídeo de dos minutos como máximo
+en el que tienen que explicar cómo van a afrontar el desafío que eligieron. También en punto anterior
+tienen que elegir uno de los dos desafíos y van a tener que poner una opción B pero van a tener
+que cargar un vídeo de hasta dos minutos explicando cómo van a afrontar. No tiene que ser lo que van
+a hacer de forma definitiva, lo que más se va a mirar es la forma en que ustedes afrontan el
+desafío y cómo ustedes se presentan, se explican y cómo llevan el vídeo de dos minutos. Nosotros
+vamos a hacer la selección de los equipos, la fecha que pusimos fue el 21 y ese mismo día
+está puesta la fecha de publicar quienes van a ser los equipos seleccionados. En el caso de
+extender la fecha del formulario, esto se va a hacer como tarde el 24, lunes 24 y el 28 tenemos
+fecha de kickoff. Va a haber tres eventos principales, va a haber tres eventos que se van a hacer a
+Campacheco en la planta, uno es el kickoff que es el inicial donde van a conocer de forma presencial
+de los tutores, se va a hablar más en profundidad de los distintos desafíos, ahí ya pueden consultas,
+pueden ir planificando alguna fecha para reunirse, alguna reunión para ir. Después van a tener
+tres semanas de trabajo, no se asusten por tres semanas de trabajo, son tres semanas para que
+ustedes puedan distribuirlo de forma que les guste, no es una pasantía, cuatro horas por día,
+tres semanas, está justamente hecho para que ustedes puedan amoldarlo a sus requerimientos de la
+facu y puedan hacerlo como le cierre mejor. El próximo evento va a ser el 18 que es el trial
+day, ya para el 18 se espera que ustedes vengan con la idea ya casi masticada por completo y una
+presentación para mostrarse a los tutores, ellos les van a hacer comentarios, quizás proponer
+modificaciones, cosas para mejorar y ese mismo día en la planta se pueden quedar hasta creo que son
+como cuatro horas para seguir laburando en el proyecto, quizás incorporar las sugerencias de
+los tutores y ese mismo día se hace la entrega final si quieren del proyecto. Después durante la
+semana siguiente de 21 a 25 los tutores tienen para evaluar, ver las entregas finales y el mismo
+25 es en la premisión también en Pacheco, donde se van a dar, o sea, se van a anunciar los ganadores
+y reconocimientos. Ahora vamos a presentarlos. Vamos a presentar y un cierre a los eventos.
+No, genial. Solo hay una para remaracar que lo tengan bien presente que el kickoff es el 28 y
+como estamos medio cerca de las fechas como decía Agus que inicialmente la idea es cerrar los forums
+el 17, pero si vemos que es necesario lo vamos a extender un par de días, sepan qué les va a llegar
+el mail que quedaron seleccionados probablemente el lunes 24 como tarde, así que ya vayan guardando
+las fechas del 28 de kickoff, sabiendo que por ahí el lunes 24 les informamos que quedaron
+seleccionados y que tienen que venir ese 28. Claro, y estos 28 son por la mañana. Buena clasión esa.
+Sí, kickoff es por la mañana, suele ser de 9 a 12 más o menos. Lo mismo para la premiación,
+el único evento que es un poco más duradero es el traigas de donde los esperamos por ahí un
+poquitito más tarde, 9 días, después igual nosotros los vamos a ir mandando mail con absolutamente
+todas las detalles de las fechas y horas y cómo hacer para ingresar y todo, pero para que tengan
+una idea del traigas day suele suceder eso, es primero a la mañana las presentaciones y después
+hasta la tarde van teniendo tiempo para hacer el fine tuning, la pulida final para las entregas y
+obviamente por la duda saqué claro, ahí está considerado el almuerzo también de parte de Ford,
+así que no tienen que preocuparse por eso, la idea es que vengan a disfrutar, tener la experiencia,
+trabajar y vean que está, la verdad que está muy copado, está muy bueno, porque además es un
+buen espacio de networking, no solo con otros compañeros de la misma universidad de otras,
+sino también con profesionales y líderes de acá de la empresa de Ford, así que está, la verdad
+que está muy bueno, son una oportunidad. Bien, si quedó, si no quedan dudas del calendario,
+podemos pasar a lo que son los premios, pero si hay alguna duda puntual del calendario,
+pueden tranquilamente levantar la mano, desmutiarse, o si no también después, sí, Maka, adelante.
+Lo digan ahora, lo cuenten ahora con los premios, pero por las dudas respecto del proceso de selección,
+ustedes hablaban de que son tres equipos con tres estudiantes por equipo, hay una, digamos,
+hay una selección de tres equipos por universidad, se pueden contar un poquito de esto en detalle
+que a nosotros ya nos lo contaron, pero para que quede más claro para los chicos.
+Y dale, buenísimos, gracias. Claro, ustedes se van a inscribir a un desafío como primera opción
+y un desafío como segunda opción. Van a mandar su vídeo de hasta dos minutos, que de vuelta,
+como dijo Agus, no tiene que ser tan específico de técnicamente cómo solucionarían el desafío,
+sino es más cómo lo encaramos, cómo pensamos trabajar en equipo, un poco mostrar también los
+soft skills. Y con esos vídeos, después acá el equipo, cada mentor, en el caso de
+Power, Train, Intelligence, Kami, Nico, van a agarrar los vídeos, van a mirarlos y la idea es
+seleccionar un equipo por universidad para cada desafío. O sea, cada desafío va a tener participando
+un solo equipo de cada universidad. Si por algún motivo queda algún cupo libre o o chanotan
+todos al mismo desafío y no queda nadie para el 2 y 3, por eso está la opción B de tenemos, ok,
+vos te interesabas de otro desafío, lo consideramos también. Creo que así es el proceso de selección.
+Acá nuestros mentores ven los desafíos y se elige un equipo de cada universidad por desafío,
+o sea, tres equipos de la universidad van a estar competiendo en total, estar participando.
+Gracias Maga por la pregunta, muy buena para aclarar porque es verdad que nosotros cada vez lo
+hablamos tantas veces que para nosotros está claro, pero el que lo escucho por primera vez es verdad.
+Así que bien, premios y reconocimientos. Bueno, antes de ir a los premios, premios de la gente
+que gana, durante todos estos eventos, más principalmente en lo que es el Trials Day,
+lo, siempre está abierta la oportunidad de pasantías, esto es súper ajeno a quién gana,
+quién pierda, quién le va mejor. Siempre hay gente de recursos humanos mirándolo, mirándolo como
+interaccionan, como los aportes que hacen, como los están mirando siempre y todos van a ser
+considerados para las pasantías. Es una forma muy buena para quizás, en vez de tener una entrevista
+grupal con recursos humanos y después te pasen con el líder del equipo, está bueno que ya esta
+gente te vea laburando, forma no tan con tanta presión como sería en una entrevista. Entonces,
+para tener en cuenta y también para todos, se les va a emitir un certificado por Innovation
+Challenge con las horas que se le puso al laburo, con las tareas que hicieron y acá sí, únicamente
+para el primer y segundo puesto de cada desafío, van a recibir quizás un reconocimiento de cómo
+le fue, pero todos van a recibir el certificado que es lo que hicieron y cuánto tiempo le dedicaron.
+Y después para los ganadores, para el primer puesto, vamos a tener una experiencia exclusiva en
+la pista de la planta Pacheco, donde vamos a organizar para traer varios productos de la marca
+para que ustedes puedan ver, subirse, llumiar, comparar y dar vueltas de la pista. Bueno,
+también Marchand Racing de Ford y reconocimientos commemorativos que dijimos junto con los
+certificados y para el segundo puesto, el Marchand Racing y el reconocimiento del trabajo.
+Buenísimo, ahí en base a la experiencia que creo que es algo que está muy bueno para los
+ganadores, es un día que los invitamos acá a nuestra planta y seleccionamos productos para que
+sea bien variada, digamos que puedan ver varios productos y comparar. Y después tenemos en nuestra
+pista de pruebas, tenemos acá algunos pilotos que son certificados para manejar en pista de prueba
+de Ford y nos dan una mano y los llevamos a dar unas vueltas y para mostrarle también el comportamiento
+del vehículo, cómo se evaluan esos vehículos, distintas funciones de los vehículos. Es una
+experiencia muy linda, muy copada y después quiero también recalcar que me parece bastante
+importante que es esto de las posibilidades de pasantías. No son pasantías garantizadas,
+pero bueno, los van a estar viendo el equipo de recursos humanos y pueden entrar en así como
+entrevistas para pasantías y esto es independientemente de cómo terminen, si primero, segundo o
+último es independiente, es por destacarse individualmente y un dato que me parece está bueno
+compartir es que del FIC 1 más del 10% de los participantes hoy en día son pasantes acá.
+Justo hoy no tenemos ninguno porque ya tarde se fueron algunos y tenemos otros de viaje,
+porque si no está bueno que ellos siempre nos acompañan en estas charlas y cuentan también su
+punto de vista de cómo vivieron el lado de parte FIC y hoy estar acá. Y ahora del Ford Innovation
+Challenge 2 van a entrar en una ola que no, la verdad no sabemos bien cuántos son todavía,
+pero van a entrar en octubre. Nosotros tenemos pasantías siempre en abril y en octubre son
+olas de pasantías, entonces por el calendario del FIC 3 existe una posibilidad de que tengan
+la oportunidad de entrar en octubre si se da y si no van a probablemente ser considerados para
+abril o futuras oportunidades. Lo que suele pasar acá que recursos humanos nos pide tener como una
+carpeta de los perfiles del FIC, así que seguramente en el Ford se tienen para cargar su
+CV ahí, así que aprovechen y carguenlo porque está bueno, eso no sirve como una base de datos acá.
+Y nada, y nos ha pasado que después de olas después del FIC por ahí medio año,
+un año después sigue entrando gente que ha participado, entonces es una muy linda
+oportunidad también, muestra bastante productividad, no solo escribirse sino trae a usted y venir
+presentar, es como que después los pone por ahí con un poco de ventaja a la hora de seleccionar
+las pasantías. Bien, ahí tienen el QR de inscripción para el formulario, creo que ahí deberías haber
+mails nuestros, no lo tengo chequeado, pero si quiero estar de Renata, pero ahora lo voy a chequear
+igual, porque escribanos para cualquier consulta que tienen, nos pueden escribir, vamos a dejar
+también ahí unos mails de contactos. Y nada, los invitamos a escribirse, está muy bueno,
+es una muy linda experiencia, es la segunda vez que la austral participa, así que por ahí pueden
+averiguar quién participó y ya preguntarles cómo vivieron esa experiencia, pero nada,
+está muy buena. Y nada, esperamos ver muchas inscripciones de ustedes, no sé si queda alguna
+duda, consulta, comentario, ¿qué quieren hacer?
+Me parece importante, del lado de la Facu, comentarles a los chicos que esto igual lo
+incluimos en los mensajes de difusión, pero sé que es importante para ellos que los tres
+grupos que se han seleccionados y que participen, digamos que obtengan el certificado de participación
+en el challenge, para las tres carreras los directores están, van a dar el seminario de
+innovación como una materia optativa con sus créditos correspondientes, así que también hay un
+reconocimiento de parte de la facultad para quienes puedan participar. Y por otro lado también
+que los incentivamos, entiendo que esto no es obligatorio para nada, pero sí nos parecía que
+está muy bueno como una experiencia que puedan presentarse de manera interdisciplinaria, ya que
+participan tres carreras que son industrial, sencilla de datos e informática, esto no es obligatorio,
+pero dada las particularidades y de los tres desafíos, creo que va a ser mucho mejor y más
+pertinente también para ustedes que puedan armar equipos intercarreras, en la medida de lo posible,
+pero bueno, es una sugerencia también. De hecho te refuerzo, eso maca, los equipos,
+creo que la mayoría de los equipos ganadores de los dos FIC fueron interdisciplinarios, se ve eso
+después en los resultados, es muy recomendable, está muy bueno, porque le aportan distintas
+visiones, puntos de vista, así que nada, recomendamos también lo mismo que hagan equipos interdisciplinarios,
+pero no es obligatorio para nada. Sí que buenísimo, si no nos quedan más consultas acá, pueden
+Si alguien tiene alguna duda, aprovechen el espacio. Yo tengo una duda, porque mirad,
+me sucede a mí, es un problema más que nada personal, digamos, yo el 18 me opero y el 28 no
+sé si podría estar en la sede de Pacheco, hay una solución o no sé si se puede hacer algo,
+siempre se puede hacer algo, siempre se puede hacer algo, vos si inscribite, no lo dudes,
+nos ponemos a pensar cómo le buscamos la vuelta ante esa situación particular, no te preocupes.
+Listo, genial, muchas gracias. Yo tengo una duda para la realización de los desafíos,
+nos van a dar los datos necesarios, digamos, para... ¿Se le vas a dar los datos, Cami?
+Los tengo preparados, si quieren se los voy a ir mandando, a vendirá, pero sí, la idea es,
+nosotros ya tenemos bases de datos armadas, de nuestro lado por lo menos vehículos conectados,
+de que ellos tienen de planta y los chicos tienen de los clientes, los de los chicos de CX,
+así que cuando sean seleccionados y ya les mandemos bien el desafío, porque lo que
+vieron ahora es una parte muy, muy chiquita, les vamos a mandar las bases de datos y todo
+lo que creemos que pueden llegar a necesitar para poder resolverlo.
+Es una excelente pregunta y voy a sumar una aclaración más a lo que decía Cami, que es,
+como dijo ella, estamos preparando los datos porque no es solamente agarrar una base de datos
+que tenemos y listos, sino porque es enorme, básicamente. Entonces, eso quería recalcar que,
+como también decía, usan principios, son tres semanas y la idea es que nosotros sabemos que
+ustedes tienen cursadas por ahí, tratamos de evitar parciales, pero por ahí ya se están
+preparando y esas cosas. La idea es no sacarle muchas horas de las semanas, por eso está pensado en
+tres semanas. Y también los desafíos están reducidos a una complejidad bastante baja,
+tratamos de esos datos, mandar un set de datos chico con pocas, no tantas variables,
+pero sí, les vamos a brindar absolutamente todos los datos que necesitan, quédense super
+tranquilos. Y después, otra cosa que me parece muy buena aclarar es que con sus mentores ustedes
+tienen la posibilidad después de hacer consultas o offline por mail, pero también plantear si es
+necesario hacer alguna reunión virtual o hasta calculo que presencial también pueden venir si lo
+quieren necesario. Pero bueno, eso también es parte del proceso de mentoreo, que los puedan
+ahí ayudar de manera virtual con reuniones y darle todas las herramientas que necesitan para que
+lo puedan hacer una vez más. Acá la idea es desarrollar esos modelos por ahí, pero es una
+prueba de concepto. La complejidad es la idea que sea baja por más que el desafío parezca muy,
+muy complicado que en la realidad no es. Así que nada, era para sumar esa aclaración a tu muy
+buena pregunta. A alguno más? Yo acompañé en el proceso a los industriales de la segunda
+edición que fue un grupo de cuarto año y se quedaron en recontentos. De hecho, uno de ese
+grupo ya entró a trabajar ahora, entró a trabajar, me encontró ayer en la pasantía y estuve en
+después les pasó bien si quieren quién. Estuve a recontento, estuve allí con él y fue justo el
+grupo que hizo la logística, estuvo reparejo el desafío de logística y la verdad que la
+experiencia está bárbara y nosotros desde la academia necesitamos beber cosas así,
+nos recondra, nutre y para los estudiantes es una flor de experiencia. Son casos reales,
+de problemáticas reales que van a poder resolver el día de mañana. Así que los instamos a
+participar porque realmente vale la pena, es un diferencial. Así que es algo que se lleva más en
+la construcción de su perfil y el currículo en el día de mañana. Gracias Juan Cruz. Sí,
+Juan Cruz acompañó el, como decía, los equipos serán pasado y vino la premiación y nada,
+está bueno también tener el aporte. Eso es un poco lo que buscamos también con los que ya
+participaron, que cuenten la experiencia del otro lado, así que se lo lleven y no tenía ese
+dato de que les dije que en octubre entraban, pero ni yo sé cuáles ni cuántos, pero bueno,
+ahí ya tenemos uno, ahí es la austral. Bueno, es genial chicos, me parece que entonces vamos a,
+los pasos a seguir son, vayan a ver el forums, cualquier duda nos escriben, lo quiero recargar
+una y mil veces, no tengan, manden 10.000 mesas de falta, vamos a tratar de responder todos y
+nada, no aprovechen la oportunidad. Esta grabación ya va a quedar también ahí en el drive, así la
+pueden revisar cuando quieran. Muchísimas gracias por conectarse, por participar y bueno,
+esperamos verlos en los próximos meses. Gracias Maca, gracias chicos. Gracias chicos,
+a ustedes también por su tiempo para esta reunión. Gracias. Gracias.
