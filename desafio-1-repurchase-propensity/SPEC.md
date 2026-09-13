@@ -19,14 +19,46 @@ Según la reunión: cada cuánto cambia el auto, historial de servicios, clics/n
 
 Estructura probable: una fila por cliente con features agregadas + label (recompró / no recompró en ventana X), o tabla transaccional que habrá que agregar nosotros.
 
-**Preguntas para los mentores en el kick-off (definen todo):**
-1. ¿Cómo está definido el target exactamente? ¿Recompra en qué ventana de tiempo (6/12/24 meses)?
+> **Actualización (reunión con el tutor, 11/9)** — ver detalle completo en
+> [`notas-tutor-2026-09-11.md`](./notas-tutor-2026-09-11.md). Resumen de lo que ya quedó definido:
+> - Todos los datos vienen **enmascarados** (anonimizados).
+> - Variables clave confirmadas: **fecha del último service** y **kilometraje** (con eso se infiere
+>   el patrón de uso y cuándo le toca el próximo service). Hay un campo tipo **`schedule_id`** que
+>   identifica el service agendado, y el dataset detalla **varios motivos de entrada al service**.
+> - Ciclo de service típico: **cada 15.000 km o 1 año** (lo que ocurra primero).
+> - Caso especial a contemplar: **transferencia de titularidad** — si el dueño original transfiere
+>   el auto y el nuevo dueño acepta compartir sus datos, vuelve a entrar como cliente activo.
+> - Hay que poder distinguir si el cliente que va al service es el mismo que compró el auto.
+
+**Preguntas para los mentores en el kick-off (lo que todavía falta cerrar):**
+1. ¿Cómo está definido el target exactamente? ¿Recompra en qué ventana de tiempo (6/12/24 meses)? — *ver también el reframing de target en §3.1, sugerido por el tutor.*
 2. ¿El dataset es una foto (snapshot) o tiene dimensión temporal? ¿Hay riesgo de leakage (features calculadas después del evento)?
 3. ¿Qué acción tomaría Ford con el score? (campaña de mail, descuento, llamado del concesionario) → define la métrica: no es lo mismo optimizar para top-1000 clientes que para todo el universo.
 4. ¿Qué tasa base de recompra hay? (para calibrar expectativas de lift)
 5. ¿Hay datos de campañas pasadas? (habilitaría hablar de uplift modeling, aunque sea como propuesta futura)
+6. ¿Cuáles son exactamente los 3 tipos/segmentos de cliente que el tutor tiene en mente? (mencionados en la reunión pero sin definir criterio exacto todavía).
 
 ## 3. Enfoque técnico (pipeline)
+
+### 3.1 Reframing del target (según el tutor)
+
+El tutor marcó que lo que más le importa no es directamente "¿el cliente va a recomprar?", sino
+un proxy más accionable y de corto plazo: **la probabilidad de que el cliente NO vaya al service
+cuando le corresponde**, prediciendo a horizonte de **el próximo mes**. La lógica causal que
+plantea es:
+
+```
+patrón de uso (km + fecha último service) → ventana esperada de próximo service
+→ si el cliente NO va en esa ventana (ni antes ni después) → pierde satisfacción
+→ se aleja de la marca → no recompra
+```
+
+Esto sugiere que el target real a modelar podría ser binario por cliente-mes: *"¿va a faltar a su
+service programado del próximo mes?"*, y no solo un score de recompra a 6-24 meses. Ambos enfoques
+no son excluyentes — el segundo (no-asistencia a service) puede ser un modelo intermedio que
+alimenta al de propensión de recompra, o directamente el approach principal si el mentor lo
+confirma en el kick-off. **Confirmar cuál de los dos targets quiere Ford como entregable
+principal.**
 
 ```
 EDA → features RFM → baseline (LogReg) → LightGBM/XGBoost → calibración → explicabilidad (SHAP) → segmentación accionable → demo
@@ -38,10 +70,11 @@ EDA → features RFM → baseline (LogReg) → LightGBM/XGBoost → calibración
    - *Frequency*: cantidad de servicios en N años, regularidad del mantenimiento, visitas web/mes.
    - *Monetary/valor*: gama del vehículo actual, gasto en servicios.
    - *Ciclo de vida*: edad del vehículo actual vs. ciclo típico de recambio del segmento (probablemente LA feature más predictiva: un cliente con un auto de 4-5 años está "en ventana").
+   - *Patrón de service* (confirmado por el tutor como variable clave): a partir de **fecha del último service + kilometraje**, calcular cuándo le corresponde el próximo service (ciclo típico: cada 15.000 km o 1 año, lo que ocurra primero) y si el cliente lo cumplió a tiempo, tarde, o directamente faltó.
    - *Engagement digital*: clics en configurador/página de modelos = señal de intención fuerte.
 3. **Baseline primero**: regresión logística con 5-10 features. Nos da piso de métrica y features interpretables desde el día 2.
 4. **Modelo principal**: LightGBM (maneja missing, categóricas, rápido de iterar). No perder tiempo con deep learning: con datos tabulares chicos, gradient boosting gana.
-5. **Validación**: split temporal si hay fechas (entrenar en pasado, validar en futuro); si no, CV estratificado. Vigilar leakage obsesivamente — es el error clásico de este tipo de desafío.
+5. **Validación**: split temporal si hay fechas (entrenar en pasado, validar en futuro); si no, CV estratificado. Vigilar leakage obsesivamente — es el error clásico de este tipo de desafío. El tutor confirmó que la evaluación del proyecto se hace por **backtesting**: se mide el lift del modelo contra lo que efectivamente pasó, así que este split temporal no es opcional — es el método de evaluación esperado.
 6. **Calibración** (Platt/isotonic): si vamos a decir "probabilidad de recompra 72%", que sea una probabilidad real. Detalle que casi ningún equipo hace y queda muy profesional.
 7. **Explicabilidad**: SHAP global (qué señales importan) + SHAP local (por qué ESTE cliente tiene score alto) → esto alimenta la historia de negocio.
 8. **Segmentación accionable**: cortar el score en 3-4 segmentos con acción sugerida:
