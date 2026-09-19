@@ -16,3 +16,9 @@ venv/
 # SO / editor
 Thumbs.db
 .DS_Store
+
+# Los datasets oficiales del challenge SI se versionan, via Git LFS.
+# Repo privado del equipo = entorno autorizado. No replicar fuera de aca.
+!Dataset/
+!Dataset/*.csv
+!Dataset/*.docx
