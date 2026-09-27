@@ -1,0 +1,39 @@
+{
+  "_comentario": "Parametros de ventana/target (justificados en reports/eda/02_cadencia_ventana.md y docs/02_decisiones_y_descartes.md) y de split temporal. Cambiar aca y correr scripts/run_pipeline.py.",
+  "ventana": {
+    "cycle_days": 365,
+    "km_interval": 16000,
+    "km_by_generation": {
+      "RANGER (P703)": 16000,
+      "RANGER RAPTOR (P703)": 16000,
+      "RANGER (P375)": 10000,
+      "RANGER RAPTOR": 10000,
+      "RANGER": 10000
+    },
+    "lead_days": 30,
+    "horizon_days": 90,
+    "min_gap_days": 90,
+    "first_due_days": 300,
+    "anchor": "last_maintenance",
+    "km_source": "current",
+    "min_history_days": 0,
+    "split_visit_days": 30,
+    "label_margin_days": 30,
+    "label_mode": "ventana"
+  },
+  "split": {
+    "train_end": "2025-09-30",
+    "valid_end": "2025-12-31"
+  },
+  "modelo": {
+    "exclude_snapshot": true,
+    "lgb_params": {}
+  },
+  "segmentos": {
+    "top_alto": 0.2,
+    "top_medio": 0.3
+  },
+  "scoring_actual": {
+    "dias_hacia_adelante": 30
+  }
+}
