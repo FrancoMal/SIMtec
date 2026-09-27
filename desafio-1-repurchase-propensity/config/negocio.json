@@ -1,0 +1,11 @@
+{
+  "_comentario": "SUPUESTOS de negocio, no datos de Ford. Se declaran para el calculo de ROI y se reemplazan por los numeros reales de Posventa. Moneda: USD para evitar el ruido inflacionario del ARS.",
+  "uplift_contacto": 0.15,
+  "_uplift_contacto": "Fraccion de los churners que un contacto proactivo (llamado + oferta) recupera. Referencia de campañas de retencion de service en la industria: 10-25 %. Se testea con A/B.",
+  "valor_retencion_usd": 250,
+  "_valor_retencion_usd": "Margen de un mantenimiento programado (mano de obra + repuestos, ~USD 80-120) + valor futuro atribuible: probabilidad de seguir en la red (siguientes services, reparaciones fuera de garantia) y efecto en recompra. Conservador.",
+  "costo_contacto_usd": 3.0,
+  "_costo_contacto_usd": "Costo promedio de un contacto humano (llamado de asesor ~5-8 min) prorrateado; un recordatorio digital cuesta centavos.",
+  "capacidad_contactos_mes": 3000,
+  "_capacidad_contactos_mes": "Capacidad de contactos humanos por mes de toda la red (95 dealers). Supuesto para dimensionar; se reemplaza por la capacidad real de Service Leads."
+}
