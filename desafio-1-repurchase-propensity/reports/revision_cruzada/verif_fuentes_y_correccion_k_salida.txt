@@ -1,0 +1,262 @@
+====================================================================================================
+A. Manual de garantía Ranger 2016 (PDF descargado) — afirmación (a), Ranger anterior
+====================================================================================================
+páginas: 65; CreationDate: D:20160713092933-03'00'; título p.1: 'FORD RANGER Garantía y Mantenimiento'
+  patrón '10\\.000 km ó 12 meses': páginas [18]
+  patrón '10\\.000 km ó 1 año': páginas [24, 26, 28]
+  patrón '20\\.000 km ó 2 años': páginas [24, 26, 28]
+  patrón 'Duratorq': páginas [18, 19, 20, 25]
+  patrón '16\\.000': páginas []
+  patrón '15\\.000': páginas []
+  patrón '12 meses ó 20\\.000 km': páginas [9]
+  p.18 contexto: te, en la que todos estamos com- prometidos. AVISOS Cuando se mencione que entre un servicio y otro no debe excederse 10.000 km ó 12 meses, tal acotación en tiempo está referida
+  p.18 motores listados: ['3.2L', '2.2L', '2.5L', 'Duratorq', 'Duratec']
+  p.24 primeras filas de la tabla del plan: 20.000 km ó 2 años | 30.000 km ó 3 años | 40.000 km ó 4 años | 50.000 km ó 5 años
+  NOTA: el manual es de 2016 (Ranger T6 = P375, motores 3.2/2.2 Duratorq y 2.5 nafta). La cita '10.000 km ó 1 año' es literal.
+  NOTA: en p.9 '12 meses ó 20.000 km' es la garantía del material de fricción del embrague, no el plan.
+
+====================================================================================================
+B. Página ford.com.ar nueva Ranger 2.0L Diesel — snapshot Playwright (WebFetch: HTTP 403) — afirmaciones (a) y (d)
+====================================================================================================
+snapshot page-2026-09-15T23-46-12-591Z.yml (2026-09-15 20:46:12), 33,808 chars
+  'revisión de 16\\.000 km ó 12 meses': 1 hit(s) -> 'revisión de 16.000 km ó 12 meses'
+  'revisión de 10\\.000 km ó 12 meses': 0 hit(s)
+  'Ranger 2\\.0L Diesel': 2 hit(s)
+  'Ranger 3\\.0L V6 Diesel': 0 hit(s)
+  'Ranger Raptor': 0 hit(s)
+  'Ranger \\(Hasta 2023\\)': 0 hit(s)
+  'Ranger 3\\.2L Diesel': 0 hit(s)
+  '2° SERVICIO 5%': 1 hit(s)
+  '3° SERVICIO 10%': 1 hit(s)
+  '4° SERVICIO EN ADELANTE: 15%': 1 hit(s) -> '4° SERVICIO EN ADELANTE: 15%'
+  '“CON VOS”|\\"CON VOS\\"|CON VOS': 1 hit(s) -> '“CON VOS”'
+  'VIGENTES DESDE EL \\d\\d/\\d\\d/\\d{4} AL \\d\\d/\\d\\d/\\d{4}': 1 hit(s) -> 'VIGENTES DESDE EL 01/09/2026 AL 30/09/2026'
+  '15\\.000': 0 hit(s)
+  '10\\.000 km': 0 hit(s)
+  tabs de servicios (km): ['16 mil', '32 mil', '48 mil', '64 mil', '80 mil', '96 mil', '112 mil', '128 mil', '144 mil', '160 mil']
+  vigencia de precios: 01/09/2026 a 30/09/2026
+snapshot page-2026-09-16T00-05-51-542Z.yml (2026-09-15 21:05:51), 35,707 chars
+  'revisión de 16\\.000 km ó 12 meses': 1 hit(s) -> 'revisión de 16.000 km ó 12 meses'
+  'revisión de 10\\.000 km ó 12 meses': 0 hit(s)
+  'Ranger 2\\.0L Diesel': 0 hit(s)
+  'Ranger 3\\.0L V6 Diesel': 2 hit(s) -> 'Ranger 3.0L V6 Diesel'
+  'Ranger Raptor': 0 hit(s)
+  'Ranger \\(Hasta 2023\\)': 0 hit(s)
+  'Ranger 3\\.2L Diesel': 0 hit(s)
+  '2° SERVICIO 5%': 1 hit(s)
+  '3° SERVICIO 10%': 1 hit(s)
+  '4° SERVICIO EN ADELANTE: 15%': 1 hit(s) -> '4° SERVICIO EN ADELANTE: 15%'
+  '“CON VOS”|\\"CON VOS\\"|CON VOS': 1 hit(s) -> '“CON VOS”'
+  'VIGENTES DESDE EL \\d\\d/\\d\\d/\\d{4} AL \\d\\d/\\d\\d/\\d{4}': 1 hit(s) -> 'VIGENTES DESDE EL 01/09/2026 AL 30/09/2026'
+  '15\\.000': 0 hit(s)
+  '10\\.000 km': 0 hit(s)
+  tabs de servicios (km): ['16 mil', '32 mil', '48 mil', '64 mil', '80 mil', '96 mil', '112 mil', '128 mil', '144 mil', '160 mil']
+  vigencia de precios: 01/09/2026 a 30/09/2026
+snapshot page-2026-09-16T00-08-15-350Z.yml (2026-09-15 21:08:15), 35,034 chars
+  'revisión de 16\\.000 km ó 12 meses': 1 hit(s) -> 'revisión de 16.000 km ó 12 meses'
+  'revisión de 10\\.000 km ó 12 meses': 0 hit(s)
+  'Ranger 2\\.0L Diesel': 0 hit(s)
+  'Ranger 3\\.0L V6 Diesel': 0 hit(s)
+  'Ranger Raptor': 2 hit(s)
+  'Ranger \\(Hasta 2023\\)': 0 hit(s)
+  'Ranger 3\\.2L Diesel': 0 hit(s)
+  '2° SERVICIO 5%': 1 hit(s)
+  '3° SERVICIO 10%': 1 hit(s)
+  '4° SERVICIO EN ADELANTE: 15%': 1 hit(s) -> '4° SERVICIO EN ADELANTE: 15%'
+  '“CON VOS”|\\"CON VOS\\"|CON VOS': 1 hit(s) -> '“CON VOS”'
+  'VIGENTES DESDE EL \\d\\d/\\d\\d/\\d{4} AL \\d\\d/\\d\\d/\\d{4}': 1 hit(s) -> 'VIGENTES DESDE EL 01/09/2026 AL 30/09/2026'
+  '15\\.000': 0 hit(s)
+  '10\\.000 km': 0 hit(s)
+  tabs de servicios (km): ['16 mil', '32 mil', '48 mil', '64 mil', '80 mil', '96 mil', '112 mil', '128 mil', '144 mil', '160 mil']
+  vigencia de precios: 01/09/2026 a 30/09/2026
+snapshot page-2026-09-16T00-08-44-469Z.yml (2026-09-15 21:08:44), 34,068 chars
+  'revisión de 16\\.000 km ó 12 meses': 0 hit(s)
+  'revisión de 10\\.000 km ó 12 meses': 1 hit(s) -> 'revisión de 10.000 km ó 12 meses'
+  'Ranger 2\\.0L Diesel': 0 hit(s)
+  'Ranger 3\\.0L V6 Diesel': 0 hit(s)
+  'Ranger Raptor': 2 hit(s)
+  'Ranger \\(Hasta 2023\\)': 0 hit(s)
+  'Ranger 3\\.2L Diesel': 0 hit(s)
+  '2° SERVICIO 5%': 1 hit(s)
+  '3° SERVICIO 10%': 1 hit(s)
+  '4° SERVICIO EN ADELANTE: 15%': 1 hit(s) -> '4° SERVICIO EN ADELANTE: 15%'
+  '“CON VOS”|\\"CON VOS\\"|CON VOS': 1 hit(s) -> '“CON VOS”'
+  'VIGENTES DESDE EL \\d\\d/\\d\\d/\\d{4} AL \\d\\d/\\d\\d/\\d{4}': 1 hit(s) -> 'VIGENTES DESDE EL 01/09/2026 AL 30/09/2026'
+  '15\\.000': 0 hit(s)
+  '10\\.000 km': 1 hit(s)
+  tabs de servicios (km): ['10 mil', '20 mil', '30 mil', '40 mil', '50 mil', '60 mil', '70 mil', '80 mil', '90 mil', '100 mil']
+  vigencia de precios: 01/09/2026 a 30/09/2026
+snapshot page-2026-09-16T00-09-00-884Z.yml (2026-09-15 21:09:00), 22,055 chars
+  'revisión de 16\\.000 km ó 12 meses': 0 hit(s)
+  'revisión de 10\\.000 km ó 12 meses': 0 hit(s)
+  'Ranger 2\\.0L Diesel': 0 hit(s)
+  'Ranger 3\\.0L V6 Diesel': 0 hit(s)
+  'Ranger Raptor': 0 hit(s)
+  'Ranger \\(Hasta 2023\\)': 1 hit(s) -> 'Ranger (Hasta 2023)'
+  'Ranger 3\\.2L Diesel': 4 hit(s)
+  '2° SERVICIO 5%': 0 hit(s)
+  '3° SERVICIO 10%': 0 hit(s)
+  '4° SERVICIO EN ADELANTE: 15%': 0 hit(s)
+  '“CON VOS”|\\"CON VOS\\"|CON VOS': 0 hit(s)
+  'VIGENTES DESDE EL \\d\\d/\\d\\d/\\d{4} AL \\d\\d/\\d\\d/\\d{4}': 0 hit(s)
+  '15\\.000': 0 hit(s)
+  '10\\.000 km': 0 hit(s)
+  tabs de servicios (km): []
+snapshot page-2026-09-16T00-10-21-228Z.yml (2026-09-15 21:10:21), 35,327 chars
+  'revisión de 16\\.000 km ó 12 meses': 0 hit(s)
+  'revisión de 10\\.000 km ó 12 meses': 1 hit(s) -> 'revisión de 10.000 km ó 12 meses'
+  'Ranger 2\\.0L Diesel': 0 hit(s)
+  'Ranger 3\\.0L V6 Diesel': 0 hit(s)
+  'Ranger Raptor': 0 hit(s)
+  'Ranger \\(Hasta 2023\\)': 0 hit(s)
+  'Ranger 3\\.2L Diesel': 2 hit(s)
+  '2° SERVICIO 5%': 1 hit(s)
+  '3° SERVICIO 10%': 1 hit(s)
+  '4° SERVICIO EN ADELANTE: 15%': 1 hit(s) -> '4° SERVICIO EN ADELANTE: 15%'
+  '“CON VOS”|\\"CON VOS\\"|CON VOS': 1 hit(s) -> '“CON VOS”'
+  'VIGENTES DESDE EL \\d\\d/\\d\\d/\\d{4} AL \\d\\d/\\d\\d/\\d{4}': 1 hit(s) -> 'VIGENTES DESDE EL 01/09/2026 AL 30/09/2026'
+  '15\\.000': 0 hit(s)
+  '10\\.000 km': 1 hit(s)
+  tabs de servicios (km): ['10 mil', '20 mil', '30 mil', '40 mil', '50 mil', '60 mil', '70 mil', '80 mil', '90 mil', '100 mil']
+  vigencia de precios: 01/09/2026 a 30/09/2026
+snapshot page-2026-09-16T00-10-24-739Z.yml (2026-09-15 21:10:24), 35,327 chars
+  'revisión de 16\\.000 km ó 12 meses': 0 hit(s)
+  'revisión de 10\\.000 km ó 12 meses': 1 hit(s) -> 'revisión de 10.000 km ó 12 meses'
+  'Ranger 2\\.0L Diesel': 0 hit(s)
+  'Ranger 3\\.0L V6 Diesel': 0 hit(s)
+  'Ranger Raptor': 0 hit(s)
+  'Ranger \\(Hasta 2023\\)': 0 hit(s)
+  'Ranger 3\\.2L Diesel': 0 hit(s)
+  '2° SERVICIO 5%': 1 hit(s)
+  '3° SERVICIO 10%': 1 hit(s)
+  '4° SERVICIO EN ADELANTE: 15%': 1 hit(s) -> '4° SERVICIO EN ADELANTE: 15%'
+  '“CON VOS”|\\"CON VOS\\"|CON VOS': 1 hit(s) -> '“CON VOS”'
+  'VIGENTES DESDE EL \\d\\d/\\d\\d/\\d{4} AL \\d\\d/\\d\\d/\\d{4}': 1 hit(s) -> 'VIGENTES DESDE EL 01/09/2026 AL 30/09/2026'
+  '15\\.000': 0 hit(s)
+  '10\\.000 km': 1 hit(s)
+  tabs de servicios (km): ['10 mil', '20 mil', '30 mil', '40 mil', '50 mil', '60 mil', '70 mil', '80 mil', '90 mil', '100 mil']
+  vigencia de precios: 01/09/2026 a 30/09/2026
+snapshot page-2026-09-16T00-10-27-979Z.yml (2026-09-15 21:10:27), 34,006 chars
+  'revisión de 16\\.000 km ó 12 meses': 0 hit(s)
+  'revisión de 10\\.000 km ó 12 meses': 1 hit(s) -> 'revisión de 10.000 km ó 12 meses'
+  'Ranger 2\\.0L Diesel': 0 hit(s)
+  'Ranger 3\\.0L V6 Diesel': 0 hit(s)
+  'Ranger Raptor': 0 hit(s)
+  'Ranger \\(Hasta 2023\\)': 0 hit(s)
+  'Ranger 3\\.2L Diesel': 1 hit(s)
+  '2° SERVICIO 5%': 1 hit(s)
+  '3° SERVICIO 10%': 1 hit(s)
+  '4° SERVICIO EN ADELANTE: 15%': 1 hit(s) -> '4° SERVICIO EN ADELANTE: 15%'
+  '“CON VOS”|\\"CON VOS\\"|CON VOS': 1 hit(s) -> '“CON VOS”'
+  'VIGENTES DESDE EL \\d\\d/\\d\\d/\\d{4} AL \\d\\d/\\d\\d/\\d{4}': 1 hit(s) -> 'VIGENTES DESDE EL 01/09/2026 AL 30/09/2026'
+  '15\\.000': 0 hit(s)
+  '10\\.000 km': 1 hit(s)
+  tabs de servicios (km): ['10 mil', '20 mil', '30 mil', '40 mil', '50 mil', '60 mil', '70 mil', '80 mil', '90 mil', '100 mil']
+  vigencia de precios: 01/09/2026 a 30/09/2026
+  URL(s) en el log de consola del snapshot: ['https://www.ford.com.ar/posventa/mantenimiento-garantia/nueva-ranger/ranger-2-0-l-diesel/']
+  URL(s) en el log de consola del snapshot: ['https://www.ford.com.ar/posventa/mantenimiento-garantia/nueva-ranger/ranger-3-0-l-v6-diesel/']
+  URL(s) en el log de consola del snapshot: ['https://www.ford.com.ar/posventa/mantenimiento-garantia/nueva-ranger/ranger-raptor-3-0-l-v6-nafta/']
+  URL(s) en el log de consola del snapshot: ['https://www.ford.com.ar/posventa/mantenimiento-garantia/ranger-raptor/']
+  URL(s) en el log de consola del snapshot: ['https://www.ford.com.ar/posventa/mantenimiento-garantia/ranger/']
+  URL(s) en el log de consola del snapshot: ['https://www.ford.com.ar/posventa/mantenimiento-garantia/ranger/ranger-3-2-l-diesel/']
+  URL(s) en el log de consola del snapshot: ['https://www.ford.com.ar/posventa/mantenimiento-garantia/ranger/ranger-2-l-diesel/']
+  URL(s) en el log de consola del snapshot: ['https://www.ford.com.ar/posventa/mantenimiento-garantia/ranger/ranger-2012-2016-3-2-l-diesel/']
+
+====================================================================================================
+C. Recalculo independiente de km/n y Δkm desde data/interim/agenda.parquet — afirmación (b)
+====================================================================================================
+turnos concluidos con n° de service: 221,703; vehículos: 87,531
+vehículo-día: 221,290; duplicados mismo n <= 30 d eliminados: 793
+RANGER (P703): km/n mediana por n = 1:16,041 (n=42,733), 2:16,081 (n=27,607), 3:16,150 (n=14,650), 4:16,173 (n=7,752), 5:16,152 (n=4,016), 6:16,091 (n=2,227), 7:16,127 (n=1,113)
+   rango n=1..7: 16,041 - 16,173
+RANGER (P375): km/n mediana por n = 2:10,301 (n=7,480), 3:10,219 (n=10,228), 4:10,184 (n=10,657), 5:10,183 (n=10,982), 6:10,217 (n=11,746), 7:10,157 (n=9,033), 8:10,144 (n=8,191), 9:10,137 (n=7,753), 10:10,131 (n=6,655), 11:10,138 (n=5,142), 12:10,125 (n=4,526)
+   rango n=2..12: 10,125 - 10,301
+RANGER (P703): Δkm mediana n->n+1 = 16,140 (p25 14,729, p75 17,642, n=46,039); todos los pares consecutivos con Δkm>0: 16,210
+RANGER (P375): Δkm mediana n->n+1 = 10,332 (p25 9,461, p75 11,728, n=51,587); todos los pares consecutivos con Δkm>0: 10,567
+Lectura: atraso relativo del km/n mediano respecto del nominal candidato
+   RANGER (P703) con K=16,000: km/n mediano llega +0.3 % a +1.1 % del nominal
+   RANGER (P703) con K=15,000: km/n mediano llega +6.9 % a +7.8 % del nominal
+   RANGER (P375) con K=10,000: km/n mediano llega +1.3 % a +3.0 % del nominal
+NOTA: los datos por sí solos no fijan el nominal (16.040 puede ser 16.000 + 0,25 % o 15.000 + 6,9 %); lo que zanja es la fuente.
+      El argumento de consistencia es que con 16.000 el atraso relativo del P703 (0,3-1,1 %) queda en la misma escala que
+      el del P375 con 10.000 (1,3-3,3 %), y con 15.000 sería 7-8 %, fuera de escala.
+
+====================================================================================================
+D. Reconstrucción de ventanas con K = 15.000 y K = 16.000 (módulo de fable) — afirmación (c)
+====================================================================================================
+config/params.json ventana: {"cycle_days": 365, "km_interval": 16000, "km_by_generation": {"RANGER (P703)": 16000, "RANGER RAPTOR (P703)": 16000, "RANGER (P375)": 10000, "RANGER RAPTOR": 10000}, "lead_days": 30, "horizon_days": 90, "min_gap_days": 90, "first_due_days": 300, "anchor": "last_maintenance", "km_source": "current", "min_history_days": 0, "split_visit_days": 30, "label_margin_days": 30, "label_mode": "ventana"}
+appointments: 492,442 turnos; sales: 59,384 (9 s)
+build_windows K=16.000: 9 s
+[K=16.000 (reconstruido)] total 347,890 | evaluables 142,558 churn 0.4159 | censuradas 35,188 | preempted 59,763 | train 101,960 valid 20,894 test 19,704 (churn test 0.4260, último scoring 2026-03-28)
+build_windows K=15.000: 9 s
+[K=15.000 (reconstruido)] total 347,890 | evaluables 145,538 churn 0.4164 | censuradas 36,397 | preempted 57,334 | train 103,842 valid 21,505 test 20,191 (churn test 0.4293, último scoring 2026-03-28)
+[data/processed/ventanas.parquet] total 347,890 | evaluables 142,558 churn 0.4159 | censuradas 35,188 | preempted 59,763 | train 101,960 valid 20,894 test 19,704 (churn test 0.4260, último scoring 2026-03-28)
+¿parquet == reconstrucción K=16.000? {'total': True, 'evaluables': True, 'censuradas': True, 'test': True, 'train': True, 'valid': True} k_gen en parquet: {16000.0: 174280, 10000.0: 173610}
+PDF viejo del informe decía: 145.538 evaluables, 36.397 censuradas, train 103.841, valid 21.506, test 20.191 (churn 42,9 %).
+Reconstrucción K=15.000 da: {'evaluables': 145538, 'censuradas': 36397, 'train': 103842, 'valid': 21505, 'test': 20191} churn test 0.429
+corrimiento del vencimiento (K16 - K15) en anclas de mantenimiento P703: mediana 10 d, p25 7, p75 14, n=103,938; sólo regla km: mediana 12 d
+ventanas cuya generación NO está en km_by_generation (reciben km_interval=16000 por default): 477 en total, 267 evaluables; generaciones: {'RANGER': 474, '<NaN>': 3}
+
+====================================================================================================
+E. ROC-AUC recalculado desde data/models/test_scored.parquet — afirmación (c)
+====================================================================================================
+test_scored: 19,704 filas, window_id único: True, mismo conjunto que el test del parquet: True, churn 0.4260
+etiquetas coinciden con el parquet: True
+ROC-AUC LightGBM calibrado 0.7391 | sin calibrar 0.7400 | PR-AUC calibrado 0.6994 | logreg 0.6743
+recall@20 % 0.361 (contactados 3,941, capturados 3,034); lift 1.81
+metricas_test.csv:                                      modelo     n  roc_auc  pr_auc
+azar (prioridad uniforme, situación actual) 19704   0.5014  0.4265
+                       heurística de reglas 19704   0.6096  0.5180
+            regresión logística (calibrada) 19704   0.6743  0.5968
+                      LightGBM sin calibrar 19704   0.7400  0.7118
+             LightGBM calibrado (isotónica) 19704   0.7391  0.6994
+
+====================================================================================================
+F. docs/informe_final.md y reports/informe_final.pdf vs artefactos de la corrida — afirmación (e)
+====================================================================================================
+mtime: informe_final.md 2026-09-15 20:58:54 | informe_final.pdf 2026-09-15 20:38:30 | resumen.md 2026-09-15 20:54:01 | ventanas.parquet 2026-09-15 20:50:57 | ablaciones.md 2026-09-15 20:57:15 | sensibilidad_ventana.csv 2026-09-15 21:03:25
+PDF: 18 páginas, CreationDate D:20260915233829+00'00'
+
+F.1 Cadenas obsoletas (corrida anterior con K = 15.000 / sin margen):
+   '27.327'                     md:  0   pdf:  0
+   'enero y abril'              md:  0   pdf:  0
+   '15.000'                     md:  2   pdf:  7
+   '20.191'                     md:  0   pdf:  4
+   '145.538'                    md:  0   pdf:  1
+   '36.397'                     md:  0   pdf:  1
+   '103.841'                    md:  0   pdf:  1
+   '21.506'                     md:  0   pdf:  1
+   '42,9 %'                     md:  0   pdf:  1
+   '16.629'                     md:  1   pdf:  1
+   '31.651'                     md:  0   pdf:  2
+   '1.825'                      md:  0   pdf:  1
+   '6.330'                      md:  0   pdf:  1
+   '9.495'                      md:  0   pdf:  1
+   '15.826'                     md:  0   pdf:  1
+   '0,736'                      md:  1   pdf:  2
+   'ECE = 0,012'                md:  0   pdf:  1
+   'el de menor, 14 %'          md:  0   pdf:  1
+   '64 % de los churners'       md:  0   pdf:  2
+   md contexto '15.000': evento o por vehículo); alrededor del 10 % de los retornos tarda más de un año. La regla "15.000 km o 1 año" que nos dio el tutor es aproximada (el no
+   md contexto '15.000': decisiones_y_descartes.md`.  # 11. Preguntas abiertas para Ford  1. ¿Confirman el plan de 15.000 km / 1 año (P703) y 10.000 km / 1 año (P375)? ¿Raptor
+
+F.2 Cifras esperadas derivadas de los artefactos (data/models, reports/modelo) y presencia en md / pdf:
+scores_actuales.parquet: 30,499 filas; columnas con 'segmento': ['segmento']; con 'turno': ['tiene_turno_agendado', 'fecha_turno_agendado']
+   cifras esperadas: 83; ausentes en md: 14; ausentes en pdf: 60
+   AUSENTES EN md: [('cap40_contactados', '7.882'), ('cap40_capturados', '5.030'), ('cap40_recall', '59,9 %'), ('cap40_lift', '1,5×'), ('seg_Bajo_churn', '26 %'), ('abl[sin concesionario / versión ]_roc', '0,737'), ('abl[con ConnectedStatusARG (snap]_roc', '0,729'), ('abl[con ConnectedStatusARG (snap]_pr', '0,686'), ('abl[exige ≥ 6 meses de historia ]_roc', '0,738'), ('abl[exige ≥ 6 meses de historia ]_pr', '0,703'), ('abl[sólo services siguientes]_roc', '0,721'), ('abl[LEAKAGE: columna KM como km ]_roc', '0,812'), ('abl[LEAKAGE: columna KM como km ]_pr', '0,803'), ('abl_siguientes_n', 'n = 16.142')]
+   AUSENTES EN pdf: [('n_test', '19.704'), ('n_train', '101.960'), ('n_valid', '20.894'), ('churn_test', '42,6 %'), ('roc_lgbm', '0,739'), ('pr_lgbm', '0,699'), ('brier_lgbm', '0,199'), ('ece_lgbm', '0,017'), ('roc_logreg', '0,674'), ('pr_logreg', '0,597'), ('evaluables', '142.558'), ('censuradas', '35.188'), ('cap5_contactados', '985'), ('cap5_recall', '11,5 %'), ('cap10_contactados', '1.970'), ('cap10_capturados', '1.739'), ('cap10_recall', '20,7 %'), ('cap20_contactados', '3.941'), ('cap20_capturados', '3.034'), ('cap20_recall', '36,1 %'), ('cap30_contactados', '5.911'), ('cap30_capturados', '4.132'), ('cap30_recall', '49,2 %'), ('cap40_contactados', '7.882'), ('cap40_capturados', '5.030'), ('cap40_recall', '59,9 %'), ('cap40_lift', '1,5×'), ('cap50_contactados', '9.852'), ('cap50_capturados', '5.785'), ('seg_Bajo_churn', '26 %'), ('roi10_modelo', '261'), ('roi10_azar', '126'), ('roi10_incremental', '+107 %'), ('roi20_modelo', '455'), ('roi20_azar', '252'), ('roi20_incremental', '+81 %'), ('roi30_modelo', '620'), ('roi30_azar', '378'), ('roi30_incremental', '+64 %'), ('roi50_modelo', '868'), ('roi50_azar', '630'), ('abl[base (pipeline)]_roc', '0,739'), ('abl[base (pipeline)]_pr', '0,699'), ('abl[sin concesionario / versión ]_roc', '0,737'), ('abl[con ConnectedStatusARG (snap]_roc', '0,729'), ('abl[con ConnectedStatusARG (snap]_pr', '0,686'), ('abl[sólo agenda (sin features de]_roc', '0,739'), ('abl[sólo agenda (sin features de]_pr', '0,699'), ('abl[exige ≥ 6 meses de historia ]_roc', '0,738'), ('abl[exige ≥ 6 meses de historia ]_pr', '0,703'), ('abl[sin encuestas]_pr', '0,699'), ('abl[sólo services siguientes]_roc', '0,721'), ('abl[LEAKAGE: columna KM como km ]_roc', '0,812'), ('abl[LEAKAGE: columna KM como km ]_pr', '0,803'), ('abl_siguientes_n', 'n = 16.142'), ('hoy_total', '30.499'), ('hoy_seg_Bajo', '15.250'), ('hoy_seg_Medio', '9.150'), ('hoy_seg_Alto', '6.099'), ('hoy_con_turno', '1.791')]
+
+F.3 Otras cifras del informe contrastadas con los datos:
+   volumen mensual de ventanas (csv): 2025 min/max 5255 7500 | 2026 ene-jul min/max 6344 7532 | informe dice 'unos 5.000 a 6.000 vehículos' (§1) y '6.000 a 7.000 ventanas por mes' (§9)
+   últimos 12 meses: clientes-mes con 2+ vehículos en ventana: 2,282 (clientes distintos 1,102); ventanas involucradas 9,354 de 82,893 = 11.3 % | informe: 'unos 1.200 clientes ... 13 % de las ventanas'
+   vehículos en el maestro 128,877; con alguna ventana no 'fuera_de_rango' 111,003; sólo con ventanas fuera de rango 16,986; sin ninguna ventana 888 | informe: 'quedan fuera los 17.973 vehículos entregados antes de 2024 sin ningún mantenimiento'
+   sensibilidad_ventana.csv: 37 filas; valores de km_by_generation: ['(P703)=16000|(P703)=16000|(P375)=10000|RAPTOR=10000', '(P703)=15000|(P703)=15000|(P375)=10000', '(P703)=16000|(P703)=16000|(P375)=16000', '(P703)=1000000000|(P703)=1000000000|(P375)=1000000000|RAPTOR=1000000000']
+   md §4 dice: 'Un único K para todo el parque: con 16.000 la P375 vence un mes tarde (más de la mitad ya volvió al abrir); con 10.000 la P703 vence antes de tiempo'
+   docs/02 §K dice: 'K = 15.000 para todo el parque: corre el vencimiento 33 días tarde en P375' (harness viejo)
+
+====================================================================================================
+G. 'Un único K para todo el parque' (informe §4): K = 16.000 también para la P375, medido POR GENERACIÓN
+====================================================================================================
+[K por generación (P375=10.000)] P375 anclas de mantenimiento: 104,813; preempted (volvió antes de abrir) 20.4%; retraso del retorno real vs vencimiento (mediana, sólo con retorno observado): 0 d; retornos antes del vencimiento: 49.6%
+[K=16.000 para todos] P375 anclas de mantenimiento: 98,254; preempted (volvió antes de abrir) 51.6%; retraso del retorno real vs vencimiento (mediana, sólo con retorno observado): -63 d; retornos antes del vencimiento: 80.0%
+   informe §4 dice: 'con 16.000 la P375 vence un mes tarde (más de la mitad ya volvió al abrir)'; docs/02 decía lo mismo para K=15.000 (33 d, 51,6 %).
