@@ -1,8 +1,20 @@
 """Rutas y constantes compartidas. Los datos crudos son SOLO LECTURA (carpeta compartida)."""
+import os
 from pathlib import Path
 
+
+def _raw_dir() -> Path:
+    """Carpeta de crudos: $SIMTEC_DATASET si está, si no G:\\SIMtec\\Dataset (Windows) o <repo>/Dataset."""
+    if os.environ.get("SIMTEC_DATASET"):
+        return Path(os.environ["SIMTEC_DATASET"])
+    for d in (Path(r"G:\SIMtec\Dataset"), Path(__file__).resolve().parents[3] / "Dataset"):
+        if d.is_dir():
+            return d
+    return Path(r"G:\SIMtec\Dataset")
+
+
 # Carpeta compartida de datos crudos: NUNCA escribir acá.
-RAW_DIR = Path(r"G:\SIMtec\Dataset")
+RAW_DIR = _raw_dir()
 RAW_SALES = RAW_DIR / "ranger_sales_arg_2024_2026.csv"
 RAW_AGENDA = RAW_DIR / "ranger_service_agenda_arg_2024_2026 1.csv"
 

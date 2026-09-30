@@ -1,12 +1,13 @@
 """Genera el informe oficial sobre el template de Ford (Template_Informe_Solucion_FIC_III.docx) y lo exporta a PDF.
 
 - Conserva portada, logo, estilos, numeración y pie de página del template.
-- Reemplaza el índice estático por un campo TOC y lo actualiza con Word (COM) antes de exportar.
+- Reemplaza el índice estático por un campo TOC y lo actualiza con Word (COM) antes de exportar; en Linux/macOS
+  lo hace LibreOffice (scripts/exportar_pdf_libreoffice.py) y el .docx queda con el índice marcado para actualizar.
 - El contenido vive en este script (secciones del template: Descripción del Desafío, Descripción de la Solución
   [Resumen Ejecutivo, Especificaciones Técnicas, Información Complementaria, Seguridad y Privacidad], Factibilidad
   Económica, Valor Diferencial e Innovación, Trabajo Futuro, Conclusiones).
 
-Uso: PYTHONIOENCODING=utf8 .venv/Scripts/python.exe scripts/build_informe_docx.py
+Uso: PYTHONIOENCODING=utf8 .venv/Scripts/python.exe scripts/build_informe_docx.py   (Linux: .venv/bin/python)
 Salidas: reports/informe_final.docx y reports/informe_final.pdf
 """
 from __future__ import annotations
@@ -15,12 +16,15 @@ import re
 import shutil
 import struct
 import subprocess
+import sys
 import zipfile
 from pathlib import Path
 from xml.sax.saxutils import escape
 
 ROOT = Path(__file__).resolve().parents[1]
-TEMPLATE = ROOT.parent / "Template_Informe_Solucion_FIC_III.docx"
+TEMPLATE = next((p for p in (ROOT.parent / "Template_Informe_Solucion_FIC_III.docx",
+                             ROOT.parent / "Dataset" / "Template_Informe_Solucion_FIC_III.docx") if p.is_file()),
+                ROOT.parent / "Template_Informe_Solucion_FIC_III.docx")
 OUT_DOCX = ROOT / "reports" / "informe_final.docx"
 OUT_PDF = ROOT / "reports" / "informe_final.pdf"
 FIG = ROOT / "reports" / "figures"
@@ -416,8 +420,32 @@ def build():
     print("docx:", OUT_DOCX, f"({OUT_DOCX.stat().st_size/1024:.0f} KB), figuras: {len(_media)}")
 
 
+def _python_con_uno() -> str | None:
+    """Un intérprete que pueda `import uno` (el del .venv normalmente no; el del sistema sí, con python3-uno)."""
+    for py in (sys.executable, shutil.which("python3"), "/usr/bin/python3",
+               "/Applications/LibreOffice.app/Contents/Resources/python"):
+        if py and Path(py).exists() and subprocess.run([py, "-c", "import uno"], capture_output=True).returncode == 0:
+            return py
+    return None
+
+
+def export_pdf_libreoffice():
+    """Actualiza el índice y exporta a PDF con LibreOffice (Linux/macOS)."""
+    py = _python_con_uno()
+    if not py:
+        sys.exit("Falta el módulo uno de LibreOffice. En Ubuntu/Debian: sudo apt install libreoffice-writer python3-uno")
+    r = subprocess.run([py, str(ROOT / "scripts" / "exportar_pdf_libreoffice.py"), str(OUT_DOCX), str(OUT_PDF)],
+                       capture_output=True, text=True, timeout=300)
+    print(r.stdout.strip(), r.stderr.strip()[-1000:])
+    if r.returncode != 0:
+        sys.exit("Falló la exportación a PDF con LibreOffice.")
+
+
 def export_pdf():
-    """Actualiza el índice y exporta a PDF con Word (COM)."""
+    """Actualiza el índice y exporta a PDF con Word (COM) en Windows, o con LibreOffice en el resto."""
+    if sys.platform != "win32":
+        export_pdf_libreoffice()
+        return
     ps = f'''
 $word = New-Object -ComObject Word.Application
 $word.Visible = $false; $word.DisplayAlerts = 0
