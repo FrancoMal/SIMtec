@@ -32,10 +32,7 @@ with st.expander("Diagnóstico del entorno", expanded=not C.pipeline_corrido()):
             estado = f"ok ({p.stat().st_size / 1e6:,.1f} MB)"
         filas.append((p.name, estado))
     filas.append(("Pipeline corrido", "sí" if C.pipeline_corrido() else "todavía no: es lo primero que hay que correr"))
-    st.markdown("| | |
-|---|---|
-" + "
-".join(f"| {k} | {v} |" for k, v in filas))
+    st.markdown("| | |\n|---|---|\n" + "\n".join(f"| {k} | {v} |" for k, v in filas))
 
 # ------------------------------------------------------------------ lanzar
 st.subheader("Recalcular")
