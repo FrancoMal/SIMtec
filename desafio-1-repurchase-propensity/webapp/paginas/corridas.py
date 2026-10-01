@@ -32,14 +32,16 @@ with st.expander("Diagnóstico del entorno", expanded=not C.pipeline_corrido()):
             estado = f"ok ({p.stat().st_size / 1e6:,.1f} MB)"
         filas.append((p.name, estado))
     filas.append(("Pipeline corrido", "sí" if C.pipeline_corrido() else "todavía no: es lo primero que hay que correr"))
-    st.markdown("| | |\n|---|---|\n" + "\n".join(f"| {k} | {v} |" for k, v in filas))
+    # las rutas van como código: en markdown "\." se come la barra invertida
+    st.markdown("| | |\n|---|---|\n" + "\n".join(
+        f"| {k} | `{v}` |" if ":\\" in v else f"| {k} | {v} |" for k, v in filas))
 
 # ------------------------------------------------------------------ lanzar
 st.subheader("Recalcular")
 activa = C.activa()
 hay_pipeline = C.pipeline_corrido()
 if not hay_pipeline:
-    st.warning("Todavía no hay resultados en esta máquina. **Lo primero es correr el Pipeline completo** (~1 min): "
+    st.warning("Todavía no hay resultados en esta máquina. **Lo primero es correr el Pipeline completo** (~1,5 min): "
                "hasta entonces el recorrido de la demo no tiene datos.", icon="⏳")
 for t in C.TAREAS + [C.TODO]:
     a, b = st.columns([4, 1.4])

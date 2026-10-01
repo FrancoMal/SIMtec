@@ -31,24 +31,24 @@ class Tarea:
 
 
 TAREAS = [
-    Tarea("pipeline", "Pipeline completo", ("scripts/run_pipeline.py",), "~1 min",
+    Tarea("pipeline", "Pipeline completo", ("scripts/run_pipeline.py",), "~1,5 min",
           "Datos crudos → ventanas → features → modelo → evaluación → scoring. Es lo primero que hay que correr: "
           "sin esto la demo no tiene datos.", necesita_pipeline=False),
-    Tarea("eda", "Análisis exploratorio", EDA, "~12 min",
+    Tarea("eda", "Análisis exploratorio", EDA, "~9 min",
           "Los 13 análisis exploratorios con su verificación independiente (informes, tablas y figuras)."),
     Tarea("notebooks", "Notebooks de evidencia", ("scripts/build_notebooks.py",), "~1 min",
           "Genera y ejecuta los tres notebooks (EDA, target y ventanas, modelo)."),
     Tarea("diccionario", "Diccionario del dataset", ("scripts/diccionario_dataset.py",), "~5 s",
           "Documenta las columnas del dataset analítico."),
-    Tarea("sensibilidad", "Sensibilidad de la ventana", ("scripts/sensibilidad_ventana.py",), "~3,5 min",
+    Tarea("sensibilidad", "Sensibilidad de la ventana", ("scripts/sensibilidad_ventana.py",), "~3 min",
           "Prueba 36 combinaciones de reglas de ventana y horizonte."),
-    Tarea("ablaciones", "Ablaciones", ("scripts/ablaciones.py",), "~1,5 min",
+    Tarea("ablaciones", "Ablaciones", ("scripts/ablaciones.py",), "~1 min",
           "Nueve variantes del modelo sobre el mismo test (leakage y robustez)."),
 ]
 TODO = Tarea("todo", "Recalcular todo (sin el informe)",
              ("scripts/run_pipeline.py",) + EDA + ("scripts/build_notebooks.py", "scripts/diccionario_dataset.py",
                                                    "scripts/sensibilidad_ventana.py", "scripts/ablaciones.py"),
-             "~20 min", "Todo lo anterior, en orden. No regenera el informe.", necesita_pipeline=False)
+             "~15 min", "Todo lo anterior, en orden. No regenera el informe.", necesita_pipeline=False)
 POR_CLAVE = {t.clave: t for t in TAREAS + [TODO]}
 EJECUTOR = WEBAPP / "lib" / "ejecutor.py"
 

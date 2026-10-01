@@ -47,7 +47,7 @@ b.caption(f"Sí: la probabilidad declarada coincide con lo que después pasa (er
 
 st.subheader("Un resultado que se puede sostener")
 if not (r["modelo"] / "ablaciones.csv").exists():
-    st.info("Esta parte sale de las **Ablaciones**: correlas desde *Corridas* (~1,5 min) para verla.", icon="⏳")
+    st.info("Esta parte sale de las **Ablaciones**: correlas desde *Corridas* (~1 min) para verla.", icon="⏳")
     st.stop()
 ab = csv(r["modelo"] / "ablaciones.csv")
 base = float(ab.loc[ab["variante"].str.startswith("base"), "roc_auc"].iloc[0])

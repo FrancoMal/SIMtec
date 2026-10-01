@@ -4,7 +4,7 @@ cd /d "%~dp0"
 set PYTHONIOENCODING=utf8
 set PYTHONDONTWRITEBYTECODE=1
 if not exist "..\.venv\Scripts\python.exe" (
-    echo No existe el entorno ..\.venv. Ver INSTRUCCIONES_MAQUINA_NUEVA.md, paso 3.
+    echo No existe el entorno ..\.venv. Ver EMPEZAR_ACA.md en la raiz del repo, paso 3.
     pause
     exit /b 1
 )

@@ -35,7 +35,7 @@ with sync_playwright() as p:
 
     # 2) lanzar el pipeline desde la web y navegar mientras corre
     pg.goto(f"{URL}/corridas"); quieta(pg)
-    pg.get_by_role("button", name="Correr (~1 min)").first.click()
+    pg.get_by_role("button", name="Correr (~1,5 min)").first.click()  # el pipeline
     pg.wait_for_timeout(4000)
     print("en curso visible:", pg.get_by_text("En curso").count() > 0)
     for pagina in ("bandeja", "caso", "resultados", "inicio"):

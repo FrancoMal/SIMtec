@@ -44,7 +44,7 @@ with t2:
     if vista == "Figuras":
         figs = sorted((r["figures"] / "eda").glob(f"{tema}_*.png"))
         st.caption(f"{len(figs)} figuras" if figs else "Todavía no hay figuras: corré **Análisis exploratorio** "
-                   "desde Corridas (~12 min).")
+                   "desde Corridas (~9 min).")
         for i in range(0, len(figs), 2):
             cols = st.columns(2)
             for c, f in zip(cols, figs[i:i + 2]):
