@@ -1,4 +1,0 @@
-segmento,n,p_media,tasa_churn,churners,share_churners,share,accion
-Alto,3941,0.7865991438704784,0.7746764780512561,3053.0,0.36345238095238097,0.19995940940686996,Llamado del concesionario (asesor de service) dentro de las 48 h + oferta concreta (precio fijo / turno con retiro y entrega).
-Medio,5913,0.4716530120930042,0.4687975646879756,2772.0,0.33,0.30001522147242377,Recordatorio personalizado por FordPass/WhatsApp con turno sugerido y beneficio liviano; segundo toque a los 10 días si no agenda.
-Bajo,9855,0.2480607949901536,0.2612886859462202,2575.0,0.30654761904761907,0.5000253691207063,Recordatorio estándar automático (Service Reminder). No gastar capacidad de contacto humano.

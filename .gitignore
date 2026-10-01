@@ -22,3 +22,27 @@ Thumbs.db
 !Dataset/
 !Dataset/*.csv
 !Dataset/*.docx
+
+# ---------------------------------------------------------------------------------------------------------------
+# Desafío 1: salidas GENERADAS. No se versionan: se recalculan en cada máquina (pipeline, análisis exploratorio,
+# notebooks, diccionario, sensibilidad y ablaciones; desde la webapp o con ejecutar.bat).
+# Quedan versionados, porque no los genera ningún script: los informes narrativos del EDA
+# (reports/eda/<tema>.md y <tema>_verificacion.md), reports/revision_cruzada/ (necesita la solución
+# independiente, que no está en el repo) y los documentos de docs/ escritos a mano.
+desafio-1-repurchase-propensity/reports/figures/
+desafio-1-repurchase-propensity/reports/modelo/
+desafio-1-repurchase-propensity/reports/eda/tables/
+desafio-1-repurchase-propensity/reports/eda/*_tablas.md
+desafio-1-repurchase-propensity/reports/eda/*_salida.md
+desafio-1-repurchase-propensity/notebooks/*.ipynb
+desafio-1-repurchase-propensity/docs/diccionario_dataset_analitico.md
+desafio-1-repurchase-propensity/reports/informe_final.*
+
+# Webapp: estado y logs de las corridas, capturas de las pruebas
+desafio-1-repurchase-propensity/webapp/corridas/
+desafio-1-repurchase-propensity/webapp/pruebas/capturas/
+
+# Herramientas locales
+.playwright-mcp/
+.pytest_cache/
+*.log

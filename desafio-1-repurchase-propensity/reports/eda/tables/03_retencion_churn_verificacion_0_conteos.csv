@@ -1,8 +1,0 @@
-,valor
-turnos is_completed_maintenance (total),222889
-  de los cuales sin vehicle_id,1186
-  de los cuales event_date fuera de ventana,0
-mantenimientos completados en ventana (turnos),221703
-  tras colapsar vehículo-día,221368
-"turnos (90) Concluido sin OS con ítem de mantenimiento, en ventana",3977
-  vehículos únicos,3659
