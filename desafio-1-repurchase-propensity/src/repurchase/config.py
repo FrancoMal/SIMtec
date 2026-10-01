@@ -4,10 +4,11 @@ from pathlib import Path
 
 
 def _raw_dir() -> Path:
-    """Carpeta de crudos: $SIMTEC_DATASET si está, si no G:\\SIMtec\\Dataset (Windows) o <repo>/Dataset."""
+    """Carpeta de crudos: $SIMTEC_DATASET si está; si no, el Dataset/ versionado del propio repo (lo que trae un clon,
+    vía Git LFS); y recién después G:\\SIMtec\\Dataset, la carpeta compartida original."""
     if os.environ.get("SIMTEC_DATASET"):
         return Path(os.environ["SIMTEC_DATASET"])
-    for d in (Path(r"G:\SIMtec\Dataset"), Path(__file__).resolve().parents[3] / "Dataset"):
+    for d in (Path(__file__).resolve().parents[3] / "Dataset", Path(r"G:\SIMtec\Dataset")):
         if d.is_dir():
             return d
     return Path(r"G:\SIMtec\Dataset")
