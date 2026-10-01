@@ -38,9 +38,9 @@ desafio-1-repurchase-propensity/notebooks/*.ipynb
 desafio-1-repurchase-propensity/docs/diccionario_dataset_analitico.md
 desafio-1-repurchase-propensity/reports/informe_final.*
 
-# Webapp: estado y logs de las corridas, capturas de las pruebas
+# Webapp: estado y logs de las corridas, capturas de los chequeos
 desafio-1-repurchase-propensity/webapp/corridas/
-desafio-1-repurchase-propensity/webapp/pruebas/capturas/
+desafio-1-repurchase-propensity/webapp/chequeos/capturas/
 
 # Herramientas locales
 .playwright-mcp/
