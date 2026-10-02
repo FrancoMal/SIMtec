@@ -10,7 +10,7 @@ from playwright.sync_api import sync_playwright
 URL = "http://localhost:8510"
 OUT = Path(__file__).parent / "capturas"
 OUT.mkdir(exist_ok=True)
-PAGINAS = ["", "bandeja", "caso", "resultados", "dashboard", "evidencia", "documentos", "corridas"]
+PAGINAS = ["", "bandeja", "caso", "resultados", "lista", "dashboard", "evidencia", "documentos", "datasets", "corridas"]
 
 
 def esperar(pg):

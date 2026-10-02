@@ -94,6 +94,40 @@ Se abre el navegador en http://localhost:8510. Para cerrarla: Ctrl+C en esa term
 
 ## 5. Recalcular: primero el pipeline
 
+### Cargar y elegir otros datasets desde la demo
+
+**Lista completa** muestra todos los vehículos del ranking del dataset activo. Permite alternar entre todos
+y los grupos Alto, Medio y Bajo (por defecto, 20 %, 30 % y 50 % de la lista priorizada). Estos porcentajes son
+fracciones del ranking, no umbrales de probabilidad. Cada fila incluye `customer_id`, `vehicle_id`, fecha de
+scoring, probabilidad entre 0 y 1, grupo y los tres motivos SHAP. Se puede buscar por identificador, mostrar
+datos adicionales (fechas, turno, concesionario y aportes SHAP) y descargar la vista o la lista completa en CSV.
+
+En **Datasets**, cargá un CSV de ventas y otro de agenda de servicios, poné un nombre al conjunto y elegí las
+fechas de entrenamiento, calibración y corte de datos. Los nombres de los archivos pueden ser distintos a los
+originales; deben conservar las columnas del extracto de Ford (la página muestra las necesarias), el formato CSV
+separado por comas y la codificación UTF-8. Se admiten hasta 1 GB por archivo.
+
+**Validar y guardar** revisa ambos archivos completos: cabeceras, identificadores, fechas y cantidad de filas.
+También guarda los nombres originales y las huellas SHA-256 para identificar los datos utilizados. Después usá
+**Usar el conjunto recién cargado** o el selector **Dataset activo** del menú lateral.
+
+En **Corridas**, ejecutá **Pipeline completo**. Cada conjunto tiene su propia carpeta bajo
+`desafio-1-repurchase-propensity/data/datasets/<id>/`, con archivos originales, configuración y resultados.
+Cambiar de conjunto cambia las páginas, el ranking, el dashboard y el historial de corridas. Volver a
+**Dataset original** recupera los resultados anteriores; los CSV originales no se reemplazan.
+
+Las fechas elegidas deben dejar ventanas evaluables con retornos y abandonos en entrenamiento, calibración y
+evaluación. Si no alcanza la historia, la corrida explica el problema. El corte no puede superar la última fecha
+efectiva de cierre o encuesta del archivo. Cada registro de corrida identifica el conjunto, sus rutas y su corte.
+
+Para conjuntos cargados se habilita el pipeline (modelo, evaluación, ranking, gráficos y evidencia). Los análisis
+complementarios, la comparación con la entrega y los documentos finales corresponden al estudio original.
+Los datos cargados y sus resultados permanecen en esta máquina y están ignorados por Git.
+
+Para comprobar los cambios sin levantar el servidor: desde `desafio-1-repurchase-propensity`, ejecutá
+`.venv\Scripts\python.exe webapp\chequeos\datasets.py`. El chequeo usa una carpeta temporal y prueba carga,
+validación, selección, aislamiento de resultados y un pipeline con los datos originales como conjunto nuevo.
+
 En la webapp, menú de la izquierda, abajo: **Corridas (recalcular)**.
 
 1. Abrí **Diagnóstico del entorno** y confirmá: Python 3.12.x, "Datos crudos" apuntando a la carpeta `Dataset` de

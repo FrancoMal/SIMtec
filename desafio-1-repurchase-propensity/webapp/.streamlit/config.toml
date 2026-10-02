@@ -2,6 +2,7 @@
 headless = true
 port = 8510
 runOnSave = false
+maxUploadSize = 1024
 
 [browser]
 gatherUsageStats = false

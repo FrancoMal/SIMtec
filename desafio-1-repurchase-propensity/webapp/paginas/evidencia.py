@@ -6,10 +6,21 @@ from pathlib import Path
 import streamlit as st
 
 from lib.fuentes import csv, etiqueta_fuente, rutas, texto
+from lib.datasets import activo
 
 st.title("Evidencia y tablas")
 etiqueta_fuente()
 r = rutas()
+if activo()["id"] != "original":
+    st.caption("Esta página muestra únicamente la evidencia generada para el conjunto activo.")
+    p = r["modelo"] / "resumen.md"
+    if p.exists():
+        st.markdown(texto(p))
+        for f in sorted((r["figures"] / "modelo").glob("*.png")):
+            st.image(str(f), caption=f.stem.replace("_", " "), width="stretch")
+    else:
+        st.info("Corré el Pipeline completo desde Corridas para generar la evidencia de este conjunto.")
+    st.stop()
 
 TEMAS = {
     "01_taxonomia_target": "1 · Qué cuenta como retorno (taxonomía del evento)",

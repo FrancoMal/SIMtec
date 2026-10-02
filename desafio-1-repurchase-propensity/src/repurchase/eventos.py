@@ -17,10 +17,11 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+import os
 
 from .io import load_agenda
 
-CUTOFF = pd.Timestamp("2026-08-25")  # última fecha con eventos efectivos (checkout / survey)
+CUTOFF = pd.Timestamp(os.environ.get("SIMTEC_CUTOFF", "2026-08-25"))
 
 APPT_LEVEL_COLS = [
     "vehicle_id", "customer_id", "dealer_id", "Region", "DealerStateOrZone", "ScheduleDate",

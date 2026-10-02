@@ -161,6 +161,10 @@ def run_training(data: pd.DataFrame, split: SplitConfig = SplitConfig(), out_dir
     out_dir.mkdir(parents=True, exist_ok=True)
     data = data[data[LABEL].notna()].reset_index(drop=True)
     tr, va, te = temporal_split(data, split)
+    for nombre, mascara in (("entrenamiento", tr), ("calibración", va), ("evaluación", te)):
+        if not mascara.any() or data.loc[mascara, LABEL].nunique() < 2:
+            raise ValueError(f"El período de {nombre} necesita ventanas evaluables con retornos y abandonos. "
+                             "Revisá las fechas elegidas o cargá un dataset con más historia.")
     cols = feature_columns(data, exclude_snapshot=exclude_snapshot)
     Xtr, cats = prepare_matrix(data.loc[tr], cols)
     Xva, _ = prepare_matrix(data.loc[va], cols, cats)

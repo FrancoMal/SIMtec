@@ -23,33 +23,38 @@ st.set_page_config(page_title="Retención de service Ranger", page_icon="🔧", 
 
 COLORES = {"Alto": "#d03b3b", "Medio": "#ec835a", "Bajo": "#0ca30c"}
 AZUL = "#2a78d6"
+RUTAS = globals().get("SIMTEC_DASHBOARD_RUTAS", {
+    "processed": config.PROCESSED_DIR, "models": config.MODELS_DIR,
+    "interim": config.INTERIM_DIR, "figures": config.FIGURES_DIR,
+})
 
 
 @st.cache_data(show_spinner=False)
-def cargar_scores():
-    df = pd.read_parquet(config.PROCESSED_DIR / "scores_actuales.parquet")
+def cargar_scores(carpeta: str):
+    df = pd.read_parquet(Path(carpeta) / "scores_actuales.parquet")
     for c in ["fecha_apertura_ventana", "vencimiento_estimado", "cierre_horizonte", "fecha_turno_agendado", "fecha_scoring"]:
         df[c] = pd.to_datetime(df[c])
     return df
 
 
 @st.cache_data(show_spinner=False)
-def cargar_usuarios():
-    return pd.read_parquet(config.PROCESSED_DIR / "scores_actuales_por_usuario.parquet")
+def cargar_usuarios(carpeta: str):
+    return pd.read_parquet(Path(carpeta) / "scores_actuales_por_usuario.parquet")
 
 
 @st.cache_data(show_spinner=False)
-def cargar_metricas():
-    m = pd.read_csv(config.MODELS_DIR / "metricas_test.csv", index_col=0)
-    info = json.loads((config.MODELS_DIR / "info.json").read_text(encoding="utf8"))
-    cap = pd.read_csv(config.MODELS_DIR / "capacidad_LightGBM_calibrado.csv")
-    lift = pd.read_csv(config.MODELS_DIR / "lift_LightGBM_calibrado.csv")
+def cargar_metricas(carpeta: str):
+    carpeta = Path(carpeta)
+    m = pd.read_csv(carpeta / "metricas_test.csv", index_col=0)
+    info = json.loads((carpeta / "info.json").read_text(encoding="utf8"))
+    cap = pd.read_csv(carpeta / "capacidad_LightGBM_calibrado.csv")
+    lift = pd.read_csv(carpeta / "lift_LightGBM_calibrado.csv")
     return m, info, cap, lift
 
 
 @st.cache_data(show_spinner=False)
-def cargar_historial(vehicle_id: str):
-    a = pd.read_parquet(config.AGENDA_PARQUET, filters=[("vehicle_id", "==", vehicle_id)],
+def cargar_historial(vehicle_id: str, carpeta: str):
+    a = pd.read_parquet(Path(carpeta) / "agenda.parquet", filters=[("vehicle_id", "==", vehicle_id)],
                         columns=["schedule_id", "ScheduleDate", "StatusARG", "ScheduleSource", "ServiceType",
                                  "ServiceName", "KM", "VehicleCurrentKM", "dealer_id", "SurveyStarRating",
                                  "EffectiveCheckinDate", "DaysInDealer", "customer_id"])
@@ -62,7 +67,7 @@ def kpi(col, label, value, help_=None):
 
 
 def main():
-    scores = cargar_scores()
+    scores = cargar_scores(str(RUTAS["processed"]))
     st.title("Bandeja de retención de service — Ranger Argentina")
     st.caption(f"Scoring al {scores['fecha_scoring'].max().date()} · {len(scores):,} vehículos en ventana o por entrar en 30 días · "
                "probabilidad calibrada de NO completar el mantenimiento programado en la red oficial dentro del horizonte.")
@@ -157,13 +162,13 @@ def main():
                "fecha turno agendado": r["fecha_turno_agendado"]}
         st.json({k: (None if (isinstance(v, float) and pd.isna(v)) else (str(v) if isinstance(v, pd.Timestamp) else v)) for k, v in det.items()})
         st.markdown("**Historial de turnos (agenda):**")
-        h = cargar_historial(vid)
+        h = cargar_historial(vid, str(RUTAS["interim"]))
         st.dataframe(h, use_container_width=True, hide_index=True)
 
     # ------------------------------------------------------------------ usuarios
     with tabs[2]:
         st.subheader("Usuarios con varios vehículos en ventana")
-        u = cargar_usuarios()
+        u = cargar_usuarios(str(RUTAS["processed"]))
         u = u[u["vehiculos_en_ventana"] >= 2].sort_values(["algun_alto", "prob_max"], ascending=[False, False])
         st.write(f"{len(u):,} usuarios tienen 2 o más vehículos en ventana (flotas). Conviene un único contacto por usuario con la lista de sus unidades.")
         st.dataframe(u.style.format({"prob_max": "{:.0%}", "prob_media": "{:.0%}"}), use_container_width=True, hide_index=True)
@@ -184,18 +189,18 @@ def main():
 
     # ------------------------------------------------------------------ modelo
     with tabs[4]:
-        m, info, cap, lift = cargar_metricas()
+        m, info, cap, lift = cargar_metricas(str(RUTAS["models"]))
         st.subheader("Evaluación fuera de tiempo (backtesting)")
         st.write(f"Entrenado con ventanas abiertas hasta {info['split']['train_end']}, calibrado en el trimestre siguiente y "
                  f"evaluado en ventanas abiertas entre {info['test_scoring_range'][0]} y {info['test_scoring_range'][1]} "
                  f"(n = {info['n_test']:,}, churn observado {info['base_rate_test']:.0%}).")
         st.dataframe(m.round(3), use_container_width=True)
         c1, c2 = st.columns(2)
-        c1.image(str(config.FIGURES_DIR / "modelo" / "ganancia.png"), caption="Curva de ganancia")
-        c2.image(str(config.FIGURES_DIR / "modelo" / "lift_deciles.png"), caption="Lift por decil")
+        c1.image(str(RUTAS["figures"] / "modelo" / "ganancia.png"), caption="Curva de ganancia")
+        c2.image(str(RUTAS["figures"] / "modelo" / "lift_deciles.png"), caption="Lift por decil")
         c3, c4 = st.columns(2)
-        c3.image(str(config.FIGURES_DIR / "modelo" / "calibracion.png"), caption="Calibración")
-        c4.image(str(config.FIGURES_DIR / "modelo" / "shap_global.png"), caption="Importancia SHAP")
+        c3.image(str(RUTAS["figures"] / "modelo" / "calibracion.png"), caption="Calibración")
+        c4.image(str(RUTAS["figures"] / "modelo" / "shap_global.png"), caption="Importancia SHAP")
         st.markdown("**Recall según capacidad de contacto (test):**")
         st.dataframe(cap.round(3), use_container_width=True, hide_index=True)
 

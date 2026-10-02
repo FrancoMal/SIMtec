@@ -10,20 +10,20 @@ import pandas as pd
 import streamlit as st
 
 from lib import corridas as C
-from lib.fuentes import REPO, WEBAPP
+from lib.fuentes import REPO, WEBAPP, rutas, etiqueta_fuente
+from lib.datasets import activo as dataset_activo, VENTAS, AGENDA
 
 st.title("Corridas")
+etiqueta_fuente()
+d = dataset_activo()
 st.markdown("Recalcula el trabajo del equipo en esta máquina. Las corridas siguen en segundo plano aunque se navegue "
             "a otra página o se cierre la pestaña. Corre una a la vez.")
 
 # ------------------------------------------------------------------ diagnóstico del entorno
-sys.path.insert(0, str(REPO / "src"))
-from repurchase import config  # noqa: E402
-
 with st.expander("Diagnóstico del entorno", expanded=not C.pipeline_corrido()):
     filas = [("Python", f"{platform.python_version()} ({sys.executable})"), ("Proyecto", str(REPO)),
-             ("Datos crudos (Dataset)", str(config.RAW_DIR))]
-    for p in (config.RAW_SALES, config.RAW_AGENDA):
+             ("Dataset", d["nombre"]), ("Datos crudos", str(d["raw"])), ("Resultados", str(d["resultados"]))]
+    for p in (d["raw"] / VENTAS, d["raw"] / AGENDA):
         if not p.exists():
             estado = "NO ENCONTRADO"
         elif p.stat().st_size < 1024 and p.read_bytes()[:40].startswith(b"version https://git-lfs"):
@@ -42,12 +42,13 @@ activa = C.activa()
 hay_pipeline = C.pipeline_corrido()
 if not hay_pipeline:
     st.warning("Todavía no hay resultados en esta máquina. **Lo primero es correr el Pipeline completo** (~1,5 min): "
-               "hasta entonces el recorrido de la demo no tiene datos.", icon="⏳")
-for t in C.TAREAS + [C.TODO]:
+               "hasta entonces el recorrido de la demo no tiene datos.")
+tareas = C.TAREAS + [C.TODO] if d["id"] == "original" else [C.POR_CLAVE["pipeline"]]
+for t in tareas:
     a, b = st.columns([4, 1.4])
     a.markdown(f"**{t.titulo}** · {t.duracion}  \n<span style='color:#7F7F7F'>{t.que_hace}</span>",
                unsafe_allow_html=True)
-    bloqueada = activa is not None or (t.necesita_pipeline and not hay_pipeline)
+    bloqueada = activa is not None or (t.necesita_pipeline and not hay_pipeline) or (d["id"] != "original" and t.clave != "pipeline")
     if b.button(f"Correr ({t.duracion})", key=f"run_{t.clave}", disabled=bloqueada, width="stretch",
                 type="primary" if t.clave == "pipeline" and not hay_pipeline else "secondary"):
         try:
@@ -57,6 +58,9 @@ for t in C.TAREAS + [C.TODO]:
         st.rerun()
 st.caption("Duraciones medidas en una corrida desde cero. No está el informe: scripts/build_informe_docx.py "
            "necesita Microsoft Word y genera la versión anterior del informe.")
+if d["id"] != "original":
+    st.info("Para los conjuntos cargados está habilitado el Pipeline completo: modelo, evaluación, ranking y gráficos. "
+            "Los análisis complementarios pertenecen al estudio original.")
 
 
 # ------------------------------------------------------------------ en curso (se refresca solo)
@@ -73,7 +77,7 @@ def en_curso():
     seg = int(time.time() - e["inicio"])
     st.subheader("En curso")
     a, b = st.columns([4, 1])
-    a.markdown(f"**{e['titulo']}** · {seg // 60}:{seg % 60:02d} transcurridos")
+    a.markdown(f"**{e['titulo']}** · {e.get('dataset_nombre', 'Dataset original')} · {seg // 60}:{seg % 60:02d} transcurridos")
     if b.button("Cancelar", width="stretch"):
         C.cancelar(e)
         st.rerun(scope="app")
@@ -102,13 +106,16 @@ else:
 
 # ------------------------------------------------------------------ comparación con la entrega
 st.subheader("¿Esta máquina reproduce la entrega?")
+if d["id"] != "original":
+    st.caption("La comparación con la entrega corresponde al Dataset original. Seleccionalo para compararla.")
+    st.stop()
 st.caption("Compara las cifras calculadas acá con las de la corrida entregada (webapp/referencia_entrega.json): "
            "métricas, capacidad de contacto, lift, segmentos, ROI, ablaciones y sensibilidad.")
 if st.button("Comparar ahora", disabled=not hay_pipeline):
     ref = json.loads((WEBAPP / "referencia_entrega.json").read_text(encoding="utf8"))
     filas = []
     for archivo, sp in ref["archivos"].items():
-        p = REPO / archivo
+        p = rutas()["raiz"] / archivo
         if not p.exists():
             filas.append({"Salida": archivo, "Resultado": "todavía no se generó", "Mayor diferencia": "—"})
             continue

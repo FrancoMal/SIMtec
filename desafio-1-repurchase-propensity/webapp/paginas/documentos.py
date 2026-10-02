@@ -5,11 +5,13 @@ import streamlit as st
 from lib.fuentes import ENTREGABLES
 
 st.title("Documentos")
+st.caption("Documentos de la entrega original del equipo. No se regeneran al seleccionar otro dataset.")
 st.caption(f"Carpeta: `{ENTREGABLES}`. Se descargan tal como están; esta página no genera ni modifica nada.")
 MIME = {".pdf": "application/pdf", ".md": "text/markdown",
         ".docx": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
         ".pptx": "application/vnd.openxmlformats-officedocument.presentationml.presentation"}
-archivos = sorted(p for p in ENTREGABLES.glob("*") if p.is_file()) if ENTREGABLES.exists() else []
+archivos = sorted(p for p in ENTREGABLES.glob("*")
+                  if p.is_file() and p.suffix.lower() in MIME and not p.name.startswith("~$")) if ENTREGABLES.exists() else []
 if not archivos:
     st.info("No hay documentos en la carpeta entregables/ del repo.")
 for p in archivos:

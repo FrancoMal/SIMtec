@@ -13,10 +13,14 @@ etiqueta_fuente()
 requiere(*SALIDAS_PIPELINE)
 
 s = scores().set_index("vehicle_id")
+if s.empty:
+    st.info("Este conjunto no tiene vehículos en la ventana actual de mantenimiento.")
+    st.stop()
 vid = st.session_state.get("vehiculo", DEMO_VEHICULO)
 if vid not in s.index:
+    candidatos = s[(s["segmento"] == "Alto") & s["last_maint_dealer"].notna()]
     vid = DEMO_VEHICULO if DEMO_VEHICULO in s.index else (
-        s[(s["segmento"] == "Alto") & s["last_maint_dealer"].notna()].sort_values("prob_churn").index[-1])
+        candidatos.sort_values("prob_churn").index[-1] if not candidatos.empty else s.index[0])
 otro = st.text_input("Vehículo", value=vid, help="Se elige desde la bandeja, o se puede pegar un identificador.")
 if otro.strip() in s.index:
     vid = otro.strip()
@@ -69,4 +73,4 @@ with st.expander("Ver cómo lo expresa el modelo (detalle técnico)"):
     for i in (1, 2, 3):
         st.code(r[f"driver_{i}"], language=None)
 
-st.page_link("paginas/resultados.py", label="Siguiente: ¿funciona?", icon="➡️")
+st.page_link("paginas/resultados.py", label="Siguiente: ¿funciona?")

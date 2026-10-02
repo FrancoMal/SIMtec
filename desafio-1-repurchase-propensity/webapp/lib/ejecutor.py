@@ -32,7 +32,10 @@ with open(carpeta / "log.txt", "a", encoding="utf8", errors="replace") as log:
         if len(scripts) > 1:
             log.write(f"\n===== [{i}/{len(scripts)}] {script} =====\n")
             log.flush()
-        proc = subprocess.Popen([sys.executable, "-u", script], cwd=e["cwd"], stdout=log, stderr=subprocess.STDOUT)
+        comando = [sys.executable, "-u", script]
+        if script == "scripts/run_pipeline.py" and e.get("params"):
+            comando += ["--config", e["params"]]
+        proc = subprocess.Popen(comando, cwd=e["cwd"], stdout=log, stderr=subprocess.STDOUT)
         codigo = proc.wait()
         if codigo != 0:
             log.write(f"\n*** {script} terminó con error (código {codigo}); no se corren los siguientes ***\n")

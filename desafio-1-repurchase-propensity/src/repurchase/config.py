@@ -37,10 +37,11 @@ RAW_AGENDA = RAW_DIR / _AGENDA
 
 # Carpeta del proyecto (todo lo generado vive acá; data/ está en .gitignore).
 PROJECT_DIR = Path(__file__).resolve().parents[2]
-DATA_DIR = PROJECT_DIR / "data"
+OUTPUT_DIR = Path(os.environ.get("SIMTEC_OUTPUT_DIR", PROJECT_DIR)).resolve()
+DATA_DIR = OUTPUT_DIR / "data"
 INTERIM_DIR = DATA_DIR / "interim"
 PROCESSED_DIR = DATA_DIR / "processed"
-REPORTS_DIR = PROJECT_DIR / "reports"
+REPORTS_DIR = OUTPUT_DIR / "reports"
 FIGURES_DIR = REPORTS_DIR / "figures"
 MODELS_DIR = DATA_DIR / "models"
 

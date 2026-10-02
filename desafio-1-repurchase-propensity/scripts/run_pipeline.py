@@ -65,6 +65,8 @@ def main(cfg_path: str, negocio_path: str, skip_train: bool):
     actual = pd.concat([hoy, prox], ignore_index=True)
     actual["poblacion_actual"] = np.where(actual["window_id"].isin(hoy["window_id"]), "en_ventana", "entra_en_30_dias")
     actual = actual.drop_duplicates("vehicle_id", keep="first")  # un vehículo, una fila
+    if actual.empty:
+        raise ValueError("No hay vehículos en ventana o por entrar para el corte elegido. Revisá el corte de datos.")
 
     ev = win[win["status"] == "evaluable"].copy()
     log(f"ventanas evaluables: {len(ev):,}  churn: {ev[LABEL].mean():.3f}   población actual: {len(actual):,}")
@@ -158,7 +160,7 @@ def main(cfg_path: str, negocio_path: str, skip_train: bool):
 
     # volumen mensual de ventanas (dimensionamiento de capacidad)
     vol = win[win["status"].isin(["evaluable", "censurada"])].groupby(win["scoring_date"].dt.to_period("M")).size()
-    vol = vol[(vol.index >= "2024-07") & (vol.index <= "2026-08")].rename("n").reset_index().rename(columns={"scoring_date": "mes"})
+    vol = vol[vol.index <= CUTOFF.to_period("M")].rename("n").reset_index().rename(columns={"scoring_date": "mes"})
     vol.to_csv(REP / "volumen_mensual_ventanas.csv", index=False)
     monthly_volume_chart(vol, FIG / "volumen_mensual.png", title="Vehículos que entran en ventana por mes")
 

@@ -27,6 +27,9 @@ s = scores()
 s = s[s["last_maint_dealer"].notna()]
 conteo = s["last_maint_dealer"].value_counts()
 dealers = conteo.index.tolist()
+if not dealers:
+    st.info("Este conjunto no tiene vehículos con un concesionario de mantenimiento asignado. Consultá el Dashboard completo.")
+    st.stop()
 idx = dealers.index(DEMO_DEALER) if DEMO_DEALER in dealers else 0
 
 c1, c2, c3 = st.columns([2, 1, 1])
@@ -73,5 +76,5 @@ if sel:
     vid = tabla.iloc[sel[0]]["Vehículo"]
     st.session_state["vehiculo"] = vid
     st.success(f"Elegido: **{vid}** · riesgo {int(tabla.iloc[sel[0]]['Riesgo de no volver'])} %")
-if st.button("Ver el caso contado ➡️", type="primary"):
+if st.button("Ver el caso contado", type="primary"):
     st.switch_page("paginas/caso.py")

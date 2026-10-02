@@ -16,6 +16,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from lib.fuentes import CORRIDAS, REPO, WEBAPP
+from lib.datasets import activo as dataset_activo
 
 EDA = tuple(sorted(f"scripts/eda/{p.name}" for p in (REPO / "scripts" / "eda").glob("*.py")))
 
@@ -54,7 +55,7 @@ EJECUTOR = WEBAPP / "lib" / "ejecutor.py"
 
 
 def pipeline_corrido() -> bool:
-    return (REPO / "data" / "processed" / "scores_actuales.parquet").exists()
+    return (dataset_activo()["resultados"] / "data" / "processed" / "scores_actuales.parquet").exists()
 
 
 def _vivo(pid: int | None) -> bool:
@@ -67,6 +68,10 @@ def _vivo(pid: int | None) -> bool:
         except OSError:
             return False
     k = ctypes.windll.kernel32
+    k.OpenProcess.restype = ctypes.c_void_p
+    k.OpenProcess.argtypes = [ctypes.c_ulong, ctypes.c_bool, ctypes.c_ulong]
+    k.GetExitCodeProcess.argtypes = [ctypes.c_void_p, ctypes.POINTER(ctypes.c_ulong)]
+    k.CloseHandle.argtypes = [ctypes.c_void_p]
     h = k.OpenProcess(0x1000, False, int(pid))  # PROCESS_QUERY_LIMITED_INFORMATION
     if not h:
         return False
@@ -94,31 +99,40 @@ def _leer(carpeta: Path) -> dict | None:
     return e
 
 
-def historial() -> list[dict]:
+def historial(todos: bool = False) -> list[dict]:
     if not CORRIDAS.exists():
         return []
     out = [_leer(c) for c in sorted(CORRIDAS.iterdir(), reverse=True) if c.is_dir()]
-    return [e for e in out if e]
+    elegido = dataset_activo()["id"]
+    return [e for e in out if e and (todos or e.get("dataset_id", "original") == elegido)]
 
 
 def activa() -> dict | None:
-    return next((e for e in historial() if e.get("fin") is None), None)
+    return next((e for e in historial(todos=True) if e.get("fin") is None), None)
 
 
 def lanzar(clave: str) -> dict:
     if activa():
         raise RuntimeError("Ya hay una corrida en curso: esperá a que termine o cancelala.")
     t = POR_CLAVE[clave]
+    d = dataset_activo()
+    if d["id"] != "original" and clave != "pipeline":
+        raise RuntimeError("Para los datasets cargados está disponible el Pipeline completo.")
     if t.necesita_pipeline and not pipeline_corrido():
         raise RuntimeError("Primero hay que correr el pipeline completo.")
     carpeta = CORRIDAS / f"{time.strftime('%Y%m%d-%H%M%S')}_{clave}"
     carpeta.mkdir(parents=True)
     _guardar(carpeta, {"clave": clave, "titulo": t.titulo, "scripts": list(t.scripts), "cwd": str(REPO),
+                       "dataset_id": d["id"], "dataset_nombre": d["nombre"], "params": str(d["params"]),
+                       "raw": str(d["raw"]), "resultados": str(d["resultados"]), "cutoff": d["cutoff"],
                        "inicio": time.time(), "fin": None, "codigo": None, "pid": None})
-    (carpeta / "log.txt").write_text(f"$ {' && '.join(t.scripts)}\n  (en {REPO}, con {sys.executable})\n",
+    (carpeta / "log.txt").write_text(f"Dataset: {d['nombre']} ({d['id']})\nDatos: {d['raw']}\n"
+                                     f"Resultados: {d['resultados']}\nCorte: {d['cutoff']}\n"
+                                     f"$ {' && '.join(t.scripts)}\n  (en {REPO}, con {sys.executable})\n",
                                      encoding="utf8")
     env = {**os.environ, "PYTHONPATH": "src", "PYTHONIOENCODING": "utf8", "PYTHONDONTWRITEBYTECODE": "1",
-           "PYTHONUNBUFFERED": "1", "MPLBACKEND": "Agg"}
+           "PYTHONUNBUFFERED": "1", "MPLBACKEND": "Agg", "SIMTEC_DATASET": str(d["raw"]),
+           "SIMTEC_OUTPUT_DIR": str(d["resultados"]), "SIMTEC_CUTOFF": d["cutoff"]}
     flags = (0x00000200 | 0x08000000) if os.name == "nt" else 0  # nuevo grupo de procesos, sin ventana
     subprocess.Popen([sys.executable, str(EJECUTOR), str(carpeta), *t.scripts], cwd=str(REPO), env=env,
                      creationflags=flags, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL,

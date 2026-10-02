@@ -13,6 +13,7 @@ from pathlib import Path
 
 import pandas as pd
 import streamlit as st
+from lib.datasets import activo
 
 sys.dont_write_bytecode = True
 
@@ -23,7 +24,7 @@ ENTREGABLES = REPO.parent / "entregables"  # documentos finales versionados en l
 
 
 def rutas() -> dict[str, Path]:
-    r = REPO
+    r = activo()["resultados"]
     return {"raiz": r, "data": r / "data", "processed": r / "data" / "processed", "models": r / "data" / "models",
             "interim": r / "data" / "interim", "reports": r / "reports", "figures": r / "reports" / "figures",
             "modelo": r / "reports" / "modelo", "docs": r / "docs"}
@@ -37,17 +38,17 @@ def mtime(p: Path) -> float:
 
 
 @st.cache_data(show_spinner=False)
-def _leer_parquet(path: str, _mt: float) -> pd.DataFrame:
+def _leer_parquet(path: str, mt: float) -> pd.DataFrame:
     return pd.read_parquet(path)
 
 
 @st.cache_data(show_spinner=False)
-def _leer_csv(path: str, _mt: float) -> pd.DataFrame:
+def _leer_csv(path: str, mt: float) -> pd.DataFrame:
     return pd.read_csv(path)
 
 
 @st.cache_data(show_spinner=False)
-def _leer_texto(path: str, _mt: float) -> str:
+def _leer_texto(path: str, mt: float) -> str:
     return Path(path).read_text(encoding="utf8")
 
 
@@ -71,19 +72,19 @@ SALIDAS_PIPELINE = ["data/processed/scores_actuales.parquet", "data/models/metri
 
 def requiere(*relativas: str, que: str = "el pipeline completo"):
     """Si faltan salidas, explica qué correr y corta la página (en vez de romperse)."""
-    faltan = [x for x in relativas if not (REPO / x).exists()]
+    faltan = [x for x in relativas if not (rutas()["raiz"] / x).exists()]
     if faltan:
         st.warning(f"Todavía no hay resultados para mostrar en esta página. Primero hay que correr **{que}** "
-                   "desde **Corridas** (el repositorio no trae salidas generadas: se recalculan en cada máquina).",
-                   icon="⏳")
-        st.page_link("paginas/corridas.py", label="Ir a Corridas", icon="⚙️")
+                   "desde **Corridas** (el repositorio no trae salidas generadas: se recalculan en cada máquina).")
+        st.page_link("paginas/corridas.py", label="Ir a Corridas")
         with st.expander("Archivos que faltan"):
             st.code("\n".join(faltan), language=None)
         st.stop()
 
 
 def etiqueta_fuente():
-    st.caption(f"Resultados calculados en esta máquina · proyecto: `{REPO}`")
+    d = activo()
+    st.caption(f"Dataset activo: {d['nombre']} · corte de datos: {d['cutoff']}")
 
 
 def pct(x: float, dec: int = 0) -> str:

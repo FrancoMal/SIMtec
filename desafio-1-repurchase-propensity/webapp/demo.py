@@ -9,8 +9,9 @@ import sys
 sys.dont_write_bytecode = True
 
 import streamlit as st  # noqa: E402
+from lib.datasets import selector
 
-st.set_page_config(page_title="Retención de service Ranger · SIMtec", page_icon="🔧", layout="wide")
+st.set_page_config(page_title="Retención de service Ranger · SIMtec", layout="wide")
 
 st.markdown("""
 <style>
@@ -29,16 +30,19 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 demo = [
-    st.Page("paginas/inicio.py", title="Inicio", icon="🏁", default=True),
-    st.Page("paginas/bandeja.py", title="1 · Bandeja del concesionario", icon="📋"),
-    st.Page("paginas/caso.py", title="2 · Caso guiado", icon="🔎"),
-    st.Page("paginas/resultados.py", title="3 · Resultados del modelo", icon="📈"),
+    st.Page("paginas/inicio.py", title="Inicio", default=True),
+    st.Page("paginas/bandeja.py", title="1 · Bandeja del concesionario"),
+    st.Page("paginas/caso.py", title="2 · Caso guiado"),
+    st.Page("paginas/resultados.py", title="3 · Resultados del modelo"),
 ]
 explorar = [
-    st.Page("paginas/dashboard.py", title="Dashboard completo", icon="🗂️"),
-    st.Page("paginas/evidencia.py", title="Evidencia y tablas", icon="🧾"),
-    st.Page("paginas/documentos.py", title="Documentos", icon="📄"),
+    st.Page("paginas/lista.py", title="Lista completa"),
+    st.Page("paginas/dashboard.py", title="Dashboard completo"),
+    st.Page("paginas/evidencia.py", title="Evidencia y tablas"),
+    st.Page("paginas/documentos.py", title="Documentos"),
 ]
-operar = [st.Page("paginas/corridas.py", title="Corridas (recalcular)", icon="⚙️")]
+operar = [st.Page("paginas/datasets.py", title="Datasets"),
+          st.Page("paginas/corridas.py", title="Corridas (recalcular)")]
 
+selector()
 st.navigation({"Demo": demo, "Explorar": explorar, "Operar": operar}).run()

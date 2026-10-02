@@ -27,5 +27,6 @@ def kpis() -> dict:
         "ece": float(met.loc["LightGBM calibrado (isotónica)", "ece"]),
         "decil1": float(lift.iloc[0]["tasa"]),
         "n_test": int(info["n_test"]), "train_end": info["split"]["train_end"],
+        "test_desde": info["test_scoring_range"][0], "test_hasta": info["test_scoring_range"][1],
         "corrida": corrida.group(1).strip() if corrida else "",
     }

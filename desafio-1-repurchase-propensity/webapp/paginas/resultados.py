@@ -5,14 +5,14 @@ import streamlit as st
 from lib.fuentes import SALIDAS_PIPELINE, requiere, csv, etiqueta_fuente, miles, pct, rutas
 from lib.metricas import kpis
 
-st.title("El mismo esfuerzo, el doble de resultado")
+st.title("Resultados del modelo")
 etiqueta_fuente()
 requiere(*SALIDAS_PIPELINE)
 k = kpis()
 r = rutas()
 st.markdown(f"Lo probamos como se usaría de verdad: el modelo se entrenó con datos hasta el {k['train_end'][8:10]}/"
-            f"{k['train_end'][5:7]}/{k['train_end'][:4]} y se evaluó en {miles(k['n_test'])} ventanas de enero a marzo "
-            f"de 2026, meses que nunca había visto.")
+            f"{k['train_end'][5:7]}/{k['train_end'][:4]} y se evaluó en {miles(k['n_test'])} ventanas entre "
+            f"{k['test_desde']} y {k['test_hasta']}, fechas que nunca había visto.")
 
 izq, der = st.columns([3, 2], gap="large")
 with izq:
@@ -30,7 +30,7 @@ with der:
 de los clientes que nuestra solución pone primeros (el 10 % de mayor riesgo) estaban dejando Ford.</div>""",
                 unsafe_allow_html=True)
     st.write("")
-    st.markdown(f"""<div class="tarjeta"><div class="numero">2 de cada 3</div>
+    st.markdown(f"""<div class="tarjeta"><div class="numero">{pct(k['recall_mes'])}</div>
 clientes que están por dejar Ford reciben un contacto a tiempo ({pct(k['recall_mes'])}), con
 {miles(k['contactos_mes'])} contactos por mes entre todos los concesionarios.</div>""", unsafe_allow_html=True)
 
@@ -47,7 +47,7 @@ b.caption(f"Sí: la probabilidad declarada coincide con lo que después pasa (er
 
 st.subheader("Un resultado que se puede sostener")
 if not (r["modelo"] / "ablaciones.csv").exists():
-    st.info("Esta parte sale de las **Ablaciones**: correlas desde *Corridas* (~1 min) para verla.", icon="⏳")
+    st.info("Las ablaciones son un análisis complementario del estudio original y no se generaron para este conjunto.")
     st.stop()
 ab = csv(r["modelo"] / "ablaciones.csv")
 base = float(ab.loc[ab["variante"].str.startswith("base"), "roc_auc"].iloc[0])

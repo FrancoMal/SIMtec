@@ -11,12 +11,12 @@ requiere(*SALIDAS_PIPELINE)
 k = kpis()
 s = scores()
 st.markdown(
-    f"Cada mes, entre 6.000 y 7.000 Ranger entran en su ventana de service y **cuatro de cada diez no vuelven a un "
-    f"concesionario oficial**. Esta solución ordena la lista para que el contacto llegue primero a quien se está yendo, "
+    f"En la evaluación de este conjunto, **{pct(k['base'])} de las ventanas de mantenimiento no terminan en un "
+    f"service en un concesionario oficial**. Esta solución ordena la lista para priorizar el contacto, "
     f"y explica por qué. Hoy la lista tiene **{miles(len(s))} vehículos**.")
 
 c1, c2, c3 = st.columns(3)
-c1.markdown(f"""<div class="tarjeta"><div class="etiqueta">Cada contacto rinde el doble</div>
+c1.markdown(f"""<div class="tarjeta"><div class="etiqueta">Contactos priorizados</div>
 <div class="numero">{round(k['prec20'] * 10)} de 10</div>
 contactos al 20 % de mayor riesgo llegan a alguien que se estaba yendo. Hoy, sin orden, son {round(k['base'] * 10)} de 10.</div>""",
             unsafe_allow_html=True)
@@ -26,7 +26,7 @@ de los que se van reciben un contacto, con {miles(k['contactos_mes'])} contactos
             unsafe_allow_html=True)
 c3.markdown(f"""<div class="tarjeta"><div class="etiqueta">Probado en meses que no vio</div>
 <div class="numero">{miles(k['n_test'])}</div>
-ventanas de enero a marzo de 2026, con un modelo entrenado sólo con datos hasta septiembre de 2025.</div>""",
+ventanas de {k['test_desde']} a {k['test_hasta']}, con un modelo entrenado hasta {k['train_end']}.</div>""",
             unsafe_allow_html=True)
 
 st.subheader("Recorrido de la demo")
@@ -42,7 +42,7 @@ pasos = [
 for pagina, titulo, desc in pasos:
     a, b = st.columns([3, 1])
     a.markdown(f'<div class="paso"><b>{titulo}</b><br>{desc}</div>', unsafe_allow_html=True)
-    b.page_link(pagina, label="Ir", icon="➡️")
+    b.page_link(pagina, label="Ir")
 
 with st.expander("Qué más hay en esta aplicación"):
     st.markdown(
