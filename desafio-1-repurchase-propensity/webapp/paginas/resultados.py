@@ -5,20 +5,22 @@ import streamlit as st
 from lib.fuentes import SALIDAS_PIPELINE, requiere, csv, etiqueta_fuente, miles, pct, rutas
 from lib.metricas import kpis
 
-st.title("Resultados del modelo")
+st.title("Resultados del modelo · primera etapa")
 etiqueta_fuente()
 requiere(*SALIDAS_PIPELINE)
 k = kpis()
 r = rutas()
+st.caption("Estas métricas evalúan el ranking de riesgo antes del filtro operativo. La segunda etapa todavía "
+           "no tiene una evaluación de retorno ni del efecto del contacto.")
 st.markdown(f"Lo probamos como se usaría de verdad: el modelo se entrenó con datos hasta el {k['train_end'][8:10]}/"
             f"{k['train_end'][5:7]}/{k['train_end'][:4]} y se evaluó en {miles(k['n_test'])} ventanas entre "
             f"{k['test_desde']} y {k['test_hasta']}, fechas que nunca había visto.")
 
 izq, der = st.columns([3, 2], gap="large")
 with izq:
-    st.markdown("**De cada 10 contactos, cuántos llegan a un cliente que estaba dejando Ford**")
+    st.markdown("**De cada 10 ventanas priorizadas, cuántas terminaron en abandono**")
     fig = go.Figure(go.Bar(
-        x=["Hoy (a todos igual)", "Con nuestra solución (el 20 % de mayor riesgo)"],
+        x=["Proporción general del test", "Modelo de riesgo (el 20 % de mayor riesgo)"],
         y=[k["base"] * 10, k["prec20"] * 10], marker_color=["#B9BCBD", "#1700F3"],
         text=[f"{round(k['base'] * 10)} de 10", f"{round(k['prec20'] * 10)} de 10"], textposition="outside",
         textfont=dict(size=22, color="#00095B"), hovertemplate="%{y:.1f} de 10<extra></extra>"))
@@ -27,12 +29,12 @@ with izq:
     st.plotly_chart(fig, width="stretch")
 with der:
     st.markdown(f"""<div class="tarjeta"><div class="numero">{round(k['decil1'] * 10)} de cada 10</div>
-de los clientes que nuestra solución pone primeros (el 10 % de mayor riesgo) estaban dejando Ford.</div>""",
+de las ventanas que el modelo pone primeras (el 10 % de mayor riesgo) terminaron en abandono.</div>""",
                 unsafe_allow_html=True)
     st.write("")
     st.markdown(f"""<div class="tarjeta"><div class="numero">{pct(k['recall_mes'])}</div>
-clientes que están por dejar Ford reciben un contacto a tiempo ({pct(k['recall_mes'])}), con
-{miles(k['contactos_mes'])} contactos por mes entre todos los concesionarios.</div>""", unsafe_allow_html=True)
+de los abandonos quedan incluidos al simular una capacidad de
+{miles(k['contactos_mes'])} casos por mes.</div>""", unsafe_allow_html=True)
 
 st.subheader("La evidencia: probado en meses que nunca vio")
 a, b = st.columns(2, gap="large")

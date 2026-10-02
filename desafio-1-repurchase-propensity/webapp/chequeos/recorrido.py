@@ -1,4 +1,4 @@
-"""Prueba del recorrido de la demo con el Chrome del sistema: carga cada página, mide el tiempo hasta que
+"""Prueba del recorrido de la aplicación con el Chrome del sistema: carga cada página, mide el tiempo hasta que
 termina de dibujarse, saca una captura y falla si Streamlit muestra una excepción.
 Uso (con la app corriendo en :8510): .venv\\Scripts\\python.exe chequeos\\recorrido.py"""
 import sys
@@ -10,7 +10,7 @@ from playwright.sync_api import sync_playwright
 URL = "http://localhost:8510"
 OUT = Path(__file__).parent / "capturas"
 OUT.mkdir(exist_ok=True)
-PAGINAS = ["", "bandeja", "caso", "resultados", "lista", "dashboard", "evidencia", "documentos", "datasets", "corridas"]
+PAGINAS = ["", "corridas", "contactos", "eficiencia"]
 
 
 def esperar(pg):

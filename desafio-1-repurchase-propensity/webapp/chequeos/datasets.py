@@ -100,12 +100,15 @@ with tempfile.TemporaryDirectory(prefix="chequeo-datasets-", dir=PROYECTO / ".ve
     app.selectbox(key="selector_dataset").select(meta["id"]).run()
     comprobar_app(app)
     assert app.session_state["dataset_id"] == meta["id"]
-    app.switch_page("paginas/inicio.py").run()
+    app.switch_page("paginas/contactos.py").run()
     comprobar_app(app)
     assert any("Todavía no hay resultados" in w.value for w in app.warning)
     app.switch_page("paginas/corridas.py").run()
     comprobar_app(app)
     assert not any(b.label == "Comparar ahora" for b in app.button)
+    app.switch_page("paginas/contactos.py").run()
+    comprobar_app(app)
+    assert any("Todavía no hay resultados" in w.value for w in app.warning)
     print("Carga, selección y ausencia de resultados mezclados: OK", flush=True)
 
     env = {**os.environ, "PYTHONPATH": str(PROYECTO / "src"), "PYTHONIOENCODING": "utf8", "MPLBACKEND": "Agg",
@@ -125,21 +128,35 @@ with tempfile.TemporaryDirectory(prefix="chequeo-datasets-", dir=PROYECTO / ".ve
     print("Copia de resultados para prueba de interfaz: OK" if "--solo-ui" in sys.argv else
           "Pipeline aislado reproduce las métricas del original: OK", flush=True)
 
-    for pagina in ("paginas/inicio.py", "paginas/lista.py", "paginas/bandeja.py", "paginas/caso.py", "paginas/resultados.py",
-                   "paginas/dashboard.py", "paginas/evidencia.py", "paginas/documentos.py", "paginas/corridas.py"):
+    # Ambas etapas pertenecen al dataset cargado; el hash enlaza el filtro con su scoring.
+    processed = nuevo["resultados"] / "data/processed"
+    contacto = json.loads((processed / "contacto_resumen.json").read_text(encoding="utf8"))
+    assert contacto["scores_sha256"] == huella(processed / "scores_actuales.parquet")
+    clientes = pd.read_parquet(processed / "contactos_por_cliente.parquet")
+    assert clientes["customer_id"].is_unique
+    assert int(clientes["seleccionado"].sum()) == contacto["clientes_seleccionados"]
+    if "--solo-ui" not in sys.argv:
+        tiempos = json.loads((nuevo["resultados"] / "reports/modelo/tiempos_pipeline.json").read_text(encoding="utf8"))
+        assert tiempos["estado"] == "completo"
+        assert Path(tiempos["dataset_raw"]) == nuevo["raw"]
+        assert Path(tiempos["resultados"]) == nuevo["resultados"]
+        assert tiempos["segundos_total"] > 0
+        assert all(e["segundos"] >= 0 for e in tiempos["etapas"])
+        print("Tiempos reales por etapa, asociados al conjunto correcto: OK", flush=True)
+    for pagina in ("paginas/datasets.py", "paginas/corridas.py", "paginas/contactos.py", "paginas/eficiencia.py"):
         app.switch_page(pagina).run()
         comprobar_app(app)
-    app.switch_page("paginas/inicio.py").run()
+    app.switch_page("paginas/contactos.py").run()
     st.cache_data.clear()
     with patch("pandas.read_parquet", wraps=pd.read_parquet) as lecturas:
-        app.switch_page("paginas/dashboard.py").run()
+        app.switch_page("paginas/contactos.py").run()
         comprobar_app(app)
         assert lecturas.called
         assert all(Path(llamada.args[0]).is_relative_to(nuevo["resultados"]) for llamada in lecturas.call_args_list)
     app.selectbox(key="selector_dataset").select("original").run()
     comprobar_app(app)
     assert app.session_state["dataset_id"] == "original"
-    app.switch_page("paginas/dashboard.py").run()
+    app.switch_page("paginas/contactos.py").run()
     comprobar_app(app)
     print("Páginas del conjunto nuevo y vuelta al original: OK", flush=True)
     assert {p: huella(p) for p in protegidos} == antes

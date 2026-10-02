@@ -8,6 +8,8 @@ con las corridas. Mientras no existan, las páginas lo dicen y mandan a "Corrida
 from __future__ import annotations
 
 import os
+import hashlib
+import json
 import sys
 from pathlib import Path
 
@@ -57,6 +59,36 @@ def scores() -> pd.DataFrame:
     return _leer_parquet(str(p), mtime(p))
 
 
+SALIDAS_CONTACTO = ["data/processed/contactos_por_cliente.parquet",
+                    "data/processed/candidatos_contacto.parquet", "data/processed/contacto_resumen.json"]
+
+
+def contactos(candidatos: bool = False) -> pd.DataFrame:
+    p = rutas()["processed"] / ("candidatos_contacto.parquet" if candidatos else "contactos_por_cliente.parquet")
+    return _leer_parquet(str(p), mtime(p))
+
+
+@st.cache_data(show_spinner=False)
+def _huella(path: str, mt: float) -> str:
+    with open(path, "rb") as archivo:
+        return hashlib.file_digest(archivo, "sha256").hexdigest()
+
+
+def resumen_contacto() -> dict:
+    return json.loads(texto(rutas()["processed"] / "contacto_resumen.json"))
+
+
+def requiere_contactos():
+    requiere("data/processed/scores_actuales.parquet", *SALIDAS_CONTACTO,
+             que="la segunda etapa: priorizar contactos (o el pipeline completo)")
+    resumen = resumen_contacto()
+    p = rutas()["processed"] / "scores_actuales.parquet"
+    if resumen.get("scores_sha256") != _huella(str(p), mtime(p)):
+        st.warning("El scoring cambió desde la última priorización. Actualizá la lista de contactos en Entrenamiento.")
+        st.page_link("paginas/corridas.py", label="Ir a Entrenamiento")
+        st.stop()
+
+
 def csv(p: Path) -> pd.DataFrame:
     return _leer_csv(str(p), mtime(p))
 
@@ -74,9 +106,8 @@ def requiere(*relativas: str, que: str = "el pipeline completo"):
     """Si faltan salidas, explica qué correr y corta la página (en vez de romperse)."""
     faltan = [x for x in relativas if not (rutas()["raiz"] / x).exists()]
     if faltan:
-        st.warning(f"Todavía no hay resultados para mostrar en esta página. Primero hay que correr **{que}** "
-                   "desde **Corridas** (el repositorio no trae salidas generadas: se recalculan en cada máquina).")
-        st.page_link("paginas/corridas.py", label="Ir a Corridas")
+        st.warning(f"Todavía no hay resultados para este conjunto. Ejecutá **{que}** desde Entrenamiento.")
+        st.page_link("paginas/corridas.py", label="Ir a Entrenamiento")
         with st.expander("Archivos que faltan"):
             st.code("\n".join(faltan), language=None)
         st.stop()

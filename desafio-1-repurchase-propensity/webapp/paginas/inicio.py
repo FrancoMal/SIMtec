@@ -16,24 +16,29 @@ st.markdown(
     f"y explica por qué. Hoy la lista tiene **{miles(len(s))} vehículos**.")
 
 c1, c2, c3 = st.columns(3)
-c1.markdown(f"""<div class="tarjeta"><div class="etiqueta">Contactos priorizados</div>
+c1.markdown(f"""<div class="tarjeta"><div class="etiqueta">Etapa 1 · precisión en test</div>
 <div class="numero">{round(k['prec20'] * 10)} de 10</div>
-contactos al 20 % de mayor riesgo llegan a alguien que se estaba yendo. Hoy, sin orden, son {round(k['base'] * 10)} de 10.</div>""",
+ventanas del 20 % de mayor riesgo terminaron en abandono. La proporción general fue {round(k['base'] * 10)} de 10.</div>""",
             unsafe_allow_html=True)
-c2.markdown(f"""<div class="tarjeta"><div class="etiqueta">Llega a tiempo</div>
+c2.markdown(f"""<div class="tarjeta"><div class="etiqueta">Etapa 1 · cobertura en test</div>
 <div class="numero">{pct(k['recall_mes'])}</div>
-de los que se van reciben un contacto, con {miles(k['contactos_mes'])} contactos por mes entre todos los concesionarios.</div>""",
+de los abandonos quedan incluidos al simular una capacidad de {miles(k['contactos_mes'])} casos por mes.</div>""",
             unsafe_allow_html=True)
 c3.markdown(f"""<div class="tarjeta"><div class="etiqueta">Probado en meses que no vio</div>
 <div class="numero">{miles(k['n_test'])}</div>
 ventanas de {k['test_desde']} a {k['test_hasta']}, con un modelo entrenado hasta {k['train_end']}.</div>""",
             unsafe_allow_html=True)
 
+st.subheader("Del análisis a la lista de contacto")
+st.markdown("**CSV → riesgo y SHAP → grupos 20 / 30 / 50 → Alto + Medio → filtro operativo por cliente → lista final.**")
+st.caption("La segunda etapa aplica reglas de oportunidad y evita contactos duplicados. Las métricas anteriores "
+           "evalúan el modelo de riesgo; el efecto del contacto todavía debe medirse.")
+st.page_link("paginas/contactos.py", label="Ver la lista final de contactos priorizados")
 st.subheader("Recorrido de la demo")
-st.caption("Tres pasos, sin correr nada: todo se lee de los resultados ya generados.")
+st.caption("Todo se lee de los resultados ya generados.")
 pasos = [
     ("paginas/bandeja.py", "1 · La bandeja de un concesionario",
-     "La lista de su concesionario, ya ordenada por riesgo, con el motivo principal de cada caso."),
+     "Los clientes seleccionados por la segunda etapa, con su riesgo, tres motivos SHAP y motivos operativos."),
     ("paginas/caso.py", "2 · Un caso, contado",
      "Una Ranger real: quién es, qué dicen sus datos y por qué está arriba de la lista."),
     ("paginas/resultados.py", "3 · ¿Funciona?",

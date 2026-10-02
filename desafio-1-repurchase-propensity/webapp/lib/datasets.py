@@ -166,10 +166,10 @@ def selector():
     ids = [d["id"] for d in opciones]
     nombres = {d["id"]: d["nombre"] for d in opciones}
     actual = activo()["id"]
-    with st.sidebar:
-        elegido = st.selectbox("Dataset activo", ids, index=ids.index(actual),
-                               format_func=nombres.get, key="selector_dataset")
-        if elegido != actual:
-            seleccionar(elegido)
-            st.rerun()
-        st.caption("Las páginas y las corridas usan este conjunto.")
+    elegido = st.selectbox("Conjunto de datos", ids, index=ids.index(actual),
+                           format_func=nombres.get, key="selector_dataset",
+                           help="La carga, el entrenamiento y los resultados usan el conjunto elegido.")
+    if elegido != actual:
+        seleccionar(elegido)
+        st.rerun()
+    st.caption(f"Datos al {date.fromisoformat(activo()['cutoff']).strftime('%d/%m/%Y')}")

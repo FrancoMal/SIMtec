@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "descripcion": "Segundo paso operativo: prioriza contactos entre Alto y Medio. No estima respuesta al contacto ni modifica la probabilidad de churn o sus motivos SHAP.",
+  "grupos": ["Alto", "Medio"],
+  "min_dias_restantes": 14,
+  "max_dias_vinculo_reciente": 730,
+  "capacidad_por_corrida": 3000,
+  "nota_capacidad": "Cantidad maxima de customer_id seleccionados en esta corrida. No representa un saldo mensual ni registra contactos ya realizados.",
+  "features_shap_accionables": [
+    "maint_per_year_observed", "last_interval_days", "mean_interval_days",
+    "std_interval_days", "last_maint_km_vs_plan", "last_interval_km_vs_k",
+    "last_maint_late_days", "days_since_last_maint", "days_since_last_appt",
+    "days_since_last_visit", "days_since_last_noshow", "days_since_last_cancel",
+    "n_noshow", "noshow_rate", "n_cancel", "cancel_rate", "n_hard_cancel",
+    "n_reschedule", "last_status", "last_rating", "mean_rating", "min_rating"
+  ],
+  "nota_orden": "Entre clientes elegibles: primero una senal SHAP positiva orientable a una accion; despues vinculo reciente; despues prob_churn descendente, dias restantes ascendentes e identificadores. Son reglas de negocio configurables, no un modelo causal."
+}

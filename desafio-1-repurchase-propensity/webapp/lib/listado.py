@@ -25,6 +25,25 @@ def filtrar(tabla: pd.DataFrame, grupo: str = "Todos", busqueda: str = "") -> pd
     resultado = tabla if grupo == "Todos" else tabla[tabla["grupo"] == grupo]
     texto = busqueda.strip()
     if texto:
-        resultado = resultado[resultado["customer_id"].astype("string").str.contains(texto, case=False, regex=False, na=False)
-                              | resultado["vehicle_id"].astype("string").str.contains(texto, case=False, regex=False, na=False)]
+        coincide = (resultado["customer_id"].astype("string").str.contains(texto, case=False, regex=False, na=False)
+                    | resultado["vehicle_id"].astype("string").str.contains(texto, case=False, regex=False, na=False))
+        if "vehiculos_cliente" in resultado:
+            coincide |= resultado["vehiculos_cliente"].astype("string").str.contains(texto, case=False, regex=False, na=False)
+        resultado = resultado[coincide]
     return resultado
+
+
+def tabla_contactos(contactos: pd.DataFrame, adicionales: bool = False) -> pd.DataFrame:
+    """Conserva probabilidad y SHAP de la etapa 1 y el orden explícito de la etapa 2."""
+    orden = contactos.sort_values(["orden_contacto", "customer_id", "vehicle_id"], na_position="last",
+                                 kind="stable").reset_index(drop=True)
+    tabla = tabla_completa(orden.assign(prioridad=range(len(orden))), adicionales)
+    for campo in ("orden_contacto", "estado_contacto", "seleccionado", "en_espera", "motivos_operativos",
+                  "n_vehiculos_cliente", "vehiculos_cliente", "grupos_cliente", "representante"):
+        tabla[campo] = orden[campo].values
+    if adicionales:
+        for campo in ("shap_accionable", "vinculo_reciente"):
+            tabla[campo] = orden[campo].values
+        # La prioridad original no es el nuevo orden de contacto.
+        tabla["prioridad"] = orden["prioridad"].values
+    return tabla

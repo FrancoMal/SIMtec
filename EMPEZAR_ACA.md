@@ -1,17 +1,17 @@
 # EMPEZAR ACÁ: correr el proyecto desde cero en una máquina nueva
 
-Rama `franco/webapp-demo` · Desafío 1 (Repurchase / retención de service) · Equipo SIMtec
+Rama `main` · Desafío 1 (Repurchase / retención de service) · Equipo SIMtec
 
-Estas instrucciones se escribieron **después** de hacer exactamente estos pasos en una carpeta limpia: clon nuevo
-desde GitHub, entorno nuevo, sin reusar nada de otra carpeta. Los tiempos son los medidos en esa prueba (Windows 11):
-sirven para saber si algo está tardando o se colgó.
+Esta guía describe la aplicación actual. Los tiempos indicados como históricos corresponden a una prueba con
+clon y entorno nuevos del **01/10/2026**, en Windows 11, anterior al segundo filtro y a la reorganización de la
+interfaz. Son una referencia de esa versión; la aplicación registra la duración real de cada nueva ejecución.
 
-> **Lo más importante.** El repositorio NO trae resultados (figuras, tablas, modelo, scores): se recalculan en cada
-> máquina. **Después de instalar, lo primero es correr el Pipeline completo (1 min 20 s).** Si abrís la webapp antes,
-> las páginas del recorrido dicen "Todavía no hay resultados": no está roto, falta ese paso.
+> **Lo más importante.** El modelo, el scoring y la lista de contactos se recalculan en cada máquina.
+> Después de instalar, abrí la aplicación, elegí los datos y ejecutá **Entrenar y priorizar**.
+> Hasta completar esa ejecución, las secciones de resultados y eficiencia indican qué falta calcular.
 
-Resumen del tiempo total: clon ~1 min + entorno ~2,5 min + pipeline ~1,5 min = **la demo funcionando en ~5 minutos**.
-Recalcular todo lo demás suma ~14 minutos más (opcional).
+En la prueba histórica, el clon llevó ~1 minuto, el entorno ~2,5 minutos y el pipeline de entonces ~1,5 minutos.
+El volumen de datos, el equipo y la versión del programa pueden cambiar esos tiempos.
 
 ---
 
@@ -28,13 +28,13 @@ Recalcular todo lo demás suma ~14 minutos más (opcional).
 | Disco | ~2,5 GB libres | — | Datos ~300 MB, entorno ~1,5 GB, salidas. |
 | Microsoft Word | **no hace falta** | — | Sólo lo usa `scripts/build_informe_docx.py` (informe), que no es parte de este recorrido. |
 
-## 2. Clonar la rama · medido: 64 s
+## 2. Clonar main · referencia histórica: 64 s
 
 En PowerShell o CMD, en la carpeta donde quieras el proyecto:
 
 ```
 git lfs install
-git clone --branch franco/webapp-demo https://github.com/FrancoMal/SIMtec.git SIMtec
+git clone --branch main https://github.com/FrancoMal/SIMtec.git SIMtec
 cd SIMtec
 ```
 
@@ -54,7 +54,7 @@ Tiene que mostrar:
 
 Si pesan ~130 bytes, ver el **problema 1**.
 
-## 3. Crear el entorno · medido: 2 a 2,5 min
+## 3. Crear el entorno · referencia histórica: 2 a 2,5 min
 
 ```
 cd desafio-1-repurchase-propensity
@@ -75,7 +75,7 @@ py -3.12 -m venv .venv
 ```
 
 Usá **`requirements-lock.txt`** (las versiones exactas con las que se generó la entrega), no `requirements.txt`
-(sólo mínimos): con el lock, los resultados salen idénticos a los entregados.
+(sólo mínimos): el lock fija el entorno de referencia para poder comparar resultados.
 
 Verificación (tiene que imprimir `3.0.5 4.7.0 1.64.0`):
 
@@ -87,75 +87,74 @@ Verificación (tiene que imprimir `3.0.5 4.7.0 1.64.0`):
 
 ```
 cd webapp
-abrir_demo.bat
+abrir_app.bat
 ```
 
 Se abre el navegador en http://localhost:8510. Para cerrarla: Ctrl+C en esa terminal o cerrar la ventana.
+El acceso anterior `abrir_demo.bat` sigue funcionando y abre la misma aplicación.
 
-## 5. Recalcular: primero el pipeline
+## 5. Usar la aplicación
 
-### Cargar y elegir otros datasets desde la demo
+La navegación superior tiene cuatro secciones: **Carga de datos → Entrenamiento → Resultados → Eficiencia del
+modelo**. El selector **Conjunto de datos**, en el encabezado, aplica a toda la aplicación.
 
-**Lista completa** muestra todos los vehículos del ranking del dataset activo. Permite alternar entre todos
-y los grupos Alto, Medio y Bajo (por defecto, 20 %, 30 % y 50 % de la lista priorizada). Estos porcentajes son
-fracciones del ranking, no umbrales de probabilidad. Cada fila incluye `customer_id`, `vehicle_id`, fecha de
-scoring, probabilidad entre 0 y 1, grupo y los tres motivos SHAP. Se puede buscar por identificador, mostrar
-datos adicionales (fechas, turno, concesionario y aportes SHAP) y descargar la vista o la lista completa en CSV.
+### Carga de datos
 
-En **Datasets**, cargá un CSV de ventas y otro de agenda de servicios, poné un nombre al conjunto y elegí las
-fechas de entrenamiento, calibración y corte de datos. Los nombres de los archivos pueden ser distintos a los
-originales; deben conservar las columnas del extracto de Ford (la página muestra las necesarias), el formato CSV
-separado por comas y la codificación UTF-8. Se admiten hasta 1 GB por archivo.
+Podés usar **Dataset original** o cargar un CSV de ventas y otro de agenda de servicios. Asigná un nombre y revisá
+**Fechas del análisis**: fin de entrenamiento, fin de calibración y corte de datos. Los archivos pueden tener
+cualquier nombre; deben conservar las columnas del extracto de Ford, usar comas y codificación UTF-8. La sección
+**Formato de los archivos** muestra las columnas necesarias. Se admiten hasta 1 GB por archivo.
 
-**Validar y guardar** revisa ambos archivos completos: cabeceras, identificadores, fechas y cantidad de filas.
-También guarda los nombres originales y las huellas SHA-256 para identificar los datos utilizados. Después usá
-**Usar el conjunto recién cargado** o el selector **Dataset activo** del menú lateral.
+**Validar y usar este conjunto** revisa ambos archivos completos: cabeceras, identificadores, fechas y cantidad
+de filas. Guarda los nombres originales y las huellas SHA-256 y deja seleccionado el conjunto nuevo. Cada conjunto
+conserva sus datos, configuración, resultados e historial bajo `desafio-1-repurchase-propensity/data/datasets/<id>/`.
+Los CSV originales no se reemplazan. Los conjuntos cargados y sus resultados quedan en esta máquina, fuera de Git.
 
-En **Corridas**, ejecutá **Pipeline completo**. Cada conjunto tiene su propia carpeta bajo
-`desafio-1-repurchase-propensity/data/datasets/<id>/`, con archivos originales, configuración y resultados.
-Cambiar de conjunto cambia las páginas, el ranking, el dashboard y el historial de corridas. Volver a
-**Dataset original** recupera los resultados anteriores; los CSV originales no se reemplazan.
+Las fechas deben dejar ventanas evaluables con retornos y abandonos en entrenamiento, calibración y evaluación.
+Si no alcanza la historia, la corrida explica el problema. El corte no puede superar la última fecha efectiva
+de cierre o encuesta del archivo.
 
-Las fechas elegidas deben dejar ventanas evaluables con retornos y abandonos en entrenamiento, calibración y
-evaluación. Si no alcanza la historia, la corrida explica el problema. El corte no puede superar la última fecha
-efectiva de cierre o encuesta del archivo. Cada registro de corrida identifica el conjunto, sus rutas y su corte.
+Para el conjunto original, se usa `SIMTEC_DATASET` si esa variable está definida; si no, `Dataset/` del repositorio
+con los CSV completos y, como alternativa, `G:\SIMtec\Dataset`. Los datos crudos son de solo lectura.
 
-Para conjuntos cargados se habilita el pipeline (modelo, evaluación, ranking, gráficos y evidencia). Los análisis
-complementarios, la comparación con la entrega y los documentos finales corresponden al estudio original.
-Los datos cargados y sus resultados permanecen en esta máquina y están ignorados por Git.
+### Entrenamiento
 
-Para comprobar los cambios sin levantar el servidor: desde `desafio-1-repurchase-propensity`, ejecutá
-`.venv\Scripts\python.exe webapp\chequeos\datasets.py`. El chequeo usa una carpeta temporal y prueba carga,
-validación, selección, aislamiento de resultados y un pipeline con los datos originales como conjunto nuevo.
+1. Confirmá el conjunto y las fechas. **Diagnóstico técnico** permite revisar el entorno y las rutas.
+2. Presioná **Entrenar y priorizar**. Procesa los CSV, entrena y evalúa el modelo, calcula SHAP y aplica el segundo
+   filtro de contactos. Muestra la etapa actual, tiempo transcurrido y registro en vivo; permite cancelar.
+3. Al terminar, seguí **Ver resultados y contactos**. El historial conserva el estado, duración y registro de cada
+   ejecución. Se puede navegar durante el proceso; Resultados y Eficiencia esperan a que termine la corrida activa.
 
-En la webapp, menú de la izquierda, abajo: **Corridas (recalcular)**.
+Si ya hay un modelo calculado, **Actualizar contactos** reaplica solo el segundo filtro con el scoring y SHAP
+existentes. No vuelve a entrenar. Solo puede ejecutarse un proceso a la vez.
 
-1. Abrí **Diagnóstico del entorno** y confirmá: Python 3.12.x, "Datos crudos" apuntando a la carpeta `Dataset` de
-   tu clon, los dos CSV en "ok" (11.5 MB y 281.8 MB).
-2. Botón **Correr** de **Pipeline completo**. Se ve el log en vivo y se puede seguir navegando mientras corre.
-   Termina con `listo. resumen en ...\reports\modelo\resumen.md`.
-3. Recién ahí el recorrido de la demo (Inicio → Bandeja → Caso guiado → Resultados) tiene datos.
+Los **Análisis complementarios** (auditoría de leakage y robustez, sensibilidad, análisis exploratorio, notebooks
+y diccionario) están disponibles para el conjunto original después del pipeline. Los documentos finales también
+corresponden al estudio original.
 
-Tiempos medidos de cada botón en la prueba desde cero (corre uno a la vez; todos terminaron sin errores):
+### Resultados
 
-| Botón | Medido | Qué genera |
-|---|---|---|
-| **Pipeline completo** (primero, obligatorio) | **1:19** | datos procesados, modelo, scores, 7 figuras y resumen del modelo |
-| Análisis exploratorio | **8:56** | 13 análisis: 55 figuras y 72 tablas de `reports/` |
-| Notebooks de evidencia | **0:50** | los 3 notebooks ejecutados |
-| Diccionario del dataset | **0:04** | `docs/diccionario_dataset_analitico.md` |
-| Sensibilidad de la ventana | **3:04** | `reports/modelo/sensibilidad_ventana.csv` (36 combinaciones) |
-| Ablaciones | **1:04** | `reports/modelo/ablaciones.csv` y `.md` |
-| Recalcular todo (sin el informe) | ~15 min | todo lo anterior, en orden |
+La vista principal muestra los clientes seleccionados por el **segundo filtro**, con búsqueda por identificador,
+filtros combinados por estado, grupo y concesionario, detalle del cliente y descarga en CSV de la vista filtrada.
+Cada fila conserva `customer_id`, `vehicle_id`, fecha de scoring, probabilidad de abandono (0 a 1), grupo y los tres
+motivos SHAP. Las pestañas internas permiten revisar la auditoría por vehículo y el análisis inicial completo.
 
-Si un botón tarda más del doble de lo medido, mirá el log en la misma página: ahí aparece el error.
+El primer análisis divide el ranking en Alto (20 %), Medio (30 %) y Bajo (50 %): son fracciones del ranking, no
+umbrales de probabilidad. El segundo reúne Alto + Medio, aplica reglas de disponibilidad e identificación y
+consolida un vehículo representativo por cliente. La capacidad inicial es 3.000 clientes por corrida; el resto
+de los elegibles queda en espera. Es una **prioridad operativa explicable**, no una estimación del efecto de llamar.
+Conserva la probabilidad y SHAP del primer modelo. Las reglas se documentan en el README del proyecto.
 
-**Al final, en la misma página: Comparar ahora.** Compara las cifras calculadas en tu máquina con las de la entrega
-(`webapp/referencia_entrega.json`): métricas, capacidad de contacto, lift, segmentos, ROI, ablaciones y sensibilidad.
-**En la prueba desde cero dio 7 de 7 salidas idénticas.** Si a vos te da distinto, algo cambió en el entorno
-(lo más probable: no se instaló con `requirements-lock.txt`).
+### Eficiencia del modelo
 
-Después de recalcular, `git status` sigue sin cambios: todas las salidas están en `.gitignore`.
+Reúne métricas de calidad y calibración, capacidad, tiempos registrados por etapa, controles de leakage y SHAP
+global y por caso. Al pasar el cursor por los encabezados o las ayudas de métricas y SHAP aparece una explicación
+de su significado y unidad. Los SHAP se muestran en log-odds del modelo base, no en puntos de probabilidad.
+Los controles de leakage distinguen la evidencia disponible de las verificaciones pendientes.
+
+Las métricas predictivas corresponden al primer modelo. Sin datos de campañas con grupo de comparación, no se
+mide el retorno adicional causado por contactar. Los tiempos nuevos se guardan en
+`reports/modelo/tiempos_pipeline.json`; las ejecuciones antiguas solo muestran las duraciones que se registraron.
 
 ## 6. Problemas posibles y su solución
 
@@ -172,19 +171,18 @@ dir Dataset\*.csv
 usa automáticamente cuando el `Dataset/` del repo sólo tiene punteros; en una máquina nueva no existe, así que hay
 que hacer el `git lfs pull`.
 
-**2. Todas las páginas dicen "Todavía no hay resultados".** Es lo esperado al clonar: falta correr el Pipeline
-completo (paso 5).
+**2. Faltan resultados o métricas.** Es lo esperado al clonar: falta ejecutar **Entrenar y priorizar** (paso 5).
 
-**3. Los botones de Análisis exploratorio, Notebooks, etc. aparecen deshabilitados.** Dependen de lo que genera el
-pipeline: se habilitan cuando termina.
+**3. Los análisis complementarios están deshabilitados o no aparecen.** Requieren el pipeline del conjunto
+original. No están disponibles para los conjuntos cargados.
 
 **4. `py -3.12` dice que no encuentra esa versión.** Falta Python 3.12: instalarlo, o usar la variante A (uv), que
 lo descarga sola.
 
-**5. `abrir_demo.bat` dice "No existe el entorno ..\.venv".** Se saltó el paso 3, o el entorno se creó en otra
+**5. `abrir_app.bat` dice "No existe el entorno ..\.venv".** Se saltó el paso 3, o el entorno se creó en otra
 carpeta: tiene que estar en `desafio-1-repurchase-propensity\.venv`.
 
-**6. La webapp no abre: el puerto 8510 está ocupado.** Hay otra webapp abierta (otra terminal con `abrir_demo.bat`).
+**6. La webapp no abre: el puerto 8510 está ocupado.** Hay otra webapp abierta (otra terminal con `abrir_app.bat`).
 Cerrarla, o abrir en otro puerto desde `desafio-1-repurchase-propensity\webapp`:
 `..\.venv\Scripts\python.exe -m streamlit run demo.py --server.port 8511`.
 
@@ -200,21 +198,35 @@ Cerrarla, o abrir en otro puerto desde `desafio-1-repurchase-propensity\webapp`:
   repo (`G:\SIMtec-astra`). Esos 11 archivos siguen versionados como evidencia archivada y sus scripts no tienen botón.
 - Los 12 informes narrativos de `reports/eda/` (`<tema>.md` y `<tema>_verificacion.md`) y los documentos de `docs/`:
   los escribió una persona, no un script, así que se versionan.
-- El informe (`scripts/build_informe_docx.py`): necesita Microsoft Word; no tiene botón. Los documentos finales están
-  en `entregables/` y se descargan desde la página Documentos de la webapp.
+- El generador del informe (`scripts/build_informe_docx.py`) necesita Microsoft Word; no tiene botón. Los documentos
+  finales se abren directamente desde `entregables/`: `informe_final_SIMtec.docx` y
+  `FIC_III_Desafio_1_Equipo_SIMtec.pptx`. El script regenera el informe base del estudio; no incorpora automáticamente
+  las actualizaciones editoriales del segundo filtro y del flujo de la aplicación agregadas a los entregables.
 
 ## 8. Chequeos automáticos (opcional)
 
-Con la webapp abierta, desde `desafio-1-repurchase-propensity\webapp`:
+Sin iniciar un servidor, desde `desafio-1-repurchase-propensity`:
+
+```
+.venv\Scripts\python.exe webapp\chequeos\contacto.py
+.venv\Scripts\python.exe webapp\chequeos\resultados_filtros.py
+.venv\Scripts\python.exe webapp\chequeos\eficiencia.py
+.venv\Scripts\python.exe webapp\chequeos\contactos_ui.py
+.venv\Scripts\python.exe webapp\chequeos\datasets.py
+```
+
+`contactos_ui.py` necesita las salidas locales del pipeline. `datasets.py` usa una carpeta temporal y ejecuta
+ambas etapas con los datos originales como conjunto nuevo para verificar carga, validación y aislamiento.
+
+Para una comprobación visual, con la aplicación ya abierta por vos, desde `desafio-1-repurchase-propensity\webapp`:
 
 ```
 ..\.venv\Scripts\python.exe -m pip install playwright
 ..\.venv\Scripts\python.exe chequeos\recorrido.py
 ```
 
-`recorrido.py` abre las 8 páginas y falla si alguna muestra un error (usa el Chrome instalado; no descarga
-navegadores). `chequeos\interaccion.py` además prueba bandeja → caso guiado y lanza un pipeline en segundo plano
-mientras navega.
+`recorrido.py` abre las cuatro secciones actuales y falla si alguna muestra una excepción de Streamlit
+(usa el Chrome instalado; no descarga navegadores).
 
 ## 9. Para quien modifique el código de esta rama
 
@@ -227,10 +239,22 @@ mientras navega.
 
 ## Anexo: cómo se hizo la prueba y qué se corrigió en el camino
 
-Prueba hecha el 01/10/2026 en `G:\SIMtec-prueba-limpia`: clon de esta rama desde GitHub, entorno desde cero por las
-dos variantes, webapp abierta sin salidas (las 8 páginas cargan y mandan a Corridas), los 6 botones corridos desde la
+**Evidencia histórica de la versión anterior a la reorganización de la aplicación y al segundo filtro.**
+Prueba hecha el 01/10/2026 en `G:\SIMtec-prueba-limpia`: clon de `franco/webapp-demo` desde GitHub, entorno desde cero por las
+dos variantes, webapp abierta sin salidas (las 8 páginas de entonces cargaban y mandaban a Corridas), los 6 botones corridos desde la
 webapp (6 de 6 sin errores), los 146 archivos que no se versionan regenerados (146 de 146), comparación con la entrega
-7 de 7 idénticas, `git status` del clon con 0 cambios, y los dos chequeos automáticos pasando.
+7 de 7 idénticas, `git status` del clon con 0 cambios, y los dos chequeos automáticos de esa versión pasando.
+No representa una nueva medición de la aplicación actual.
+
+| Proceso histórico | Tiempo medido |
+|---|---|
+| Pipeline de la versión del 01/10/2026 | 1:19 |
+| Análisis exploratorio | 8:56 |
+| Notebooks de evidencia | 0:50 |
+| Diccionario del dataset | 0:04 |
+| Sensibilidad de la ventana | 3:04 |
+| Ablaciones | 1:04 |
+| Recalcular todo (sin el informe) | ~15 min |
 
 Lo que se corrigió en la rama a partir de la prueba:
 

@@ -13,6 +13,7 @@ import argparse
 import json
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 import numpy as np
@@ -21,6 +22,7 @@ import pandas as pd
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from repurchase import config  # noqa: E402
+from repurchase.contacto import guardar_contactos  # noqa: E402
 from repurchase.eventos import CUTOFF, appointments  # noqa: E402
 from repurchase.evaluacion import precision_recall_points, recall_at_monthly_capacity  # noqa: E402
 from repurchase.explicabilidad import global_importance, local_drivers, nombre, shap_values  # noqa: E402
@@ -41,7 +43,62 @@ def log(msg):
     print(f"[{time.strftime('%H:%M:%S')}] {msg}", flush=True)
 
 
+class RegistroTiempos:
+    """Mediciones de pared por etapa; se escriben también al fallar una corrida."""
+
+    def __init__(self, path: Path, **procedencia):
+        self.path = Path(path)
+        self.inicio = time.perf_counter()
+        self.inicio_etapa = self.inicio
+        self.datos = {"schema_version": 1, "estado": "ejecutando",
+                      "inicio": datetime.now(timezone.utc).isoformat(), "fin": None,
+                      "segundos_total": 0.0, "etapas": [], **procedencia}
+        self._guardar()
+
+    def _guardar(self):
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        temporal = self.path.with_suffix(".tmp")
+        temporal.write_text(json.dumps(self.datos, ensure_ascii=False, indent=2), encoding="utf8")
+        temporal.replace(self.path)
+
+    def _cerrar_etapa(self, ahora: float, estado: str):
+        if self.datos["etapas"]:
+            self.datos["etapas"][-1].update(segundos=max(0.0, ahora - self.inicio_etapa), estado=estado)
+
+    def etapa(self, clave: str, nombre_etapa: str):
+        ahora = time.perf_counter()
+        self._cerrar_etapa(ahora, "completo")
+        self.datos["segundos_total"] = max(0.0, ahora - self.inicio)
+        self.datos["etapas"].append({"clave": clave, "nombre": nombre_etapa,
+                                      "segundos": None, "estado": "ejecutando"})
+        self.inicio_etapa = ahora
+        self._guardar()
+
+    def terminar(self, estado: str, error: str | None = None):
+        ahora = time.perf_counter()
+        self._cerrar_etapa(ahora, "error" if estado == "error" else "completo")
+        self.datos.update(estado=estado, fin=datetime.now(timezone.utc).isoformat(),
+                          segundos_total=max(0.0, ahora - self.inicio))
+        if error:
+            self.datos["error"] = error
+        self._guardar()
+
+
 def main(cfg_path: str, negocio_path: str, skip_train: bool):
+    reloj = RegistroTiempos(REP / "tiempos_pipeline.json", cutoff=str(CUTOFF.date()),
+                            dataset_raw=str(config.RAW_DIR), resultados=str(config.OUTPUT_DIR),
+                            configuracion=str(Path(cfg_path).resolve()))
+    try:
+        _ejecutar(cfg_path, negocio_path, skip_train, reloj)
+    except BaseException as exc:
+        reloj.terminar("error", f"{type(exc).__name__}: {exc}")
+        raise
+    else:
+        reloj.terminar("solo_features" if skip_train else "completo")
+
+
+def _ejecutar(cfg_path: str, negocio_path: str, skip_train: bool, reloj: RegistroTiempos):
+    reloj.etapa("carga", "Lectura y preparación de datos")
     cfg = json.loads(Path(cfg_path).read_text(encoding="utf8"))
     neg = json.loads(Path(negocio_path).read_text(encoding="utf8"))
     params = WindowParams.from_dict(cfg["ventana"])
@@ -50,6 +107,7 @@ def main(cfg_path: str, negocio_path: str, skip_train: bool):
 
     log(f"parámetros de ventana: {params.to_dict()}")
     appt = appointments(); sales = load_sales()
+    reloj.etapa("ventanas", "Construcción de ventanas")
     win = build_windows(appt, sales, params)
     win.to_parquet(config.PROCESSED_DIR / "ventanas.parquet", index=False)
     log("ventanas por estado:\n" + win["status"].value_counts().to_string())
@@ -71,12 +129,14 @@ def main(cfg_path: str, negocio_path: str, skip_train: bool):
     ev = win[win["status"] == "evaluable"].copy()
     log(f"ventanas evaluables: {len(ev):,}  churn: {ev[LABEL].mean():.3f}   población actual: {len(actual):,}")
 
+    reloj.etapa("features_historicas", "Variables del historial")
     log("features (evaluables)…")
     feat = build_features(ev, appt, sales)
     data = feat.merge(ev[["window_id", LABEL, "label_no_visit", "status", "window_n"]], on="window_id", how="left")
     data.to_parquet(config.PROCESSED_DIR / "dataset_analitico.parquet", index=False)
     log(f"dataset analítico: {data.shape}")
 
+    reloj.etapa("features_actuales", "Variables de la población actual")
     log("features (población actual)…")
     feat_act = build_features(actual, appt, sales)
     feat_act = feat_act.merge(actual[["window_id", "poblacion_actual", "scoring_date_original", "horizon_end",
@@ -84,12 +144,14 @@ def main(cfg_path: str, negocio_path: str, skip_train: bool):
 
     if skip_train:
         log("skip_train: no se reentrena"); return
+    reloj.etapa("entrenamiento", "Entrenamiento, calibración y evaluación")
     log("entrenamiento + evaluación temporal…")
     res = run_training(data, split, exclude_snapshot=cfg["modelo"]["exclude_snapshot"], lgb_params=cfg["modelo"]["lgb_params"])
     metrics = res["metrics"]; tables = res["tables"]
     log("métricas test:\n" + metrics.round(4).to_string())
 
     # ---------- figuras de evaluación ----------
+    reloj.etapa("graficos_evaluacion", "Gráficos de evaluación")
     main_name = "LightGBM calibrado (isotónica)"
     gains_chart({k: v["gains"] for k, v in tables.items() if not k.startswith("azar")}, FIG / "ganancia.png", highlight=main_name)
     lift_chart(tables[main_name]["lift"], FIG / "lift_deciles.png")
@@ -100,6 +162,7 @@ def main(cfg_path: str, negocio_path: str, skip_train: bool):
               "regresión logística": precision_recall_points(yte, ts["p_logreg"].values)}, float(yte.mean()), FIG / "precision_recall.png")
 
     # ---------- SHAP ----------
+    reloj.etapa("shap_test", "Explicaciones SHAP del test")
     log("SHAP…")
     Xte = res["X_test"]
     rng = np.random.default_rng(1)
@@ -114,6 +177,7 @@ def main(cfg_path: str, negocio_path: str, skip_train: bool):
     ejemplo.to_parquet(config.MODELS_DIR / "test_drivers_muestra.parquet", index=False)
 
     # ---------- segmentos y ROI en test (churners observados) ----------
+    reloj.etapa("segmentacion_test", "Segmentos y simulación de capacidad")
     ts = ts.copy(); ts["p"] = ts["p_lgbm_cal"]
     ts["segmento"] = segmentar_por_capacidad(ts["p"], cfg["segmentos"]["top_alto"], cfg["segmentos"]["top_medio"])
     seg = resumen_segmentos(ts)
@@ -125,6 +189,7 @@ def main(cfg_path: str, negocio_path: str, skip_train: bool):
     umbral = umbral_rentable(neg["valor_retencion_usd"], neg["uplift_contacto"], neg["costo_contacto_usd"])
 
     # ---------- scoring de la población actual ----------
+    reloj.etapa("scoring_actual", "Scoring y SHAP de la población actual")
     log("scoring población actual…")
     Xa, _ = prepare_matrix(feat_act, res["columns"], res["categories"])
     p_raw = res["booster"].predict(Xa, num_iteration=res["booster"].best_iteration)
@@ -152,6 +217,12 @@ def main(cfg_path: str, negocio_path: str, skip_train: bool):
     out = out.sort_values("prioridad")
     out.to_parquet(config.PROCESSED_DIR / "scores_actuales.parquet", index=False)
     out.to_csv(config.PROCESSED_DIR / "scores_actuales.csv", index=False)
+    reloj.etapa("contacto", "Segundo filtro y consolidación por cliente")
+    log("segunda etapa: Alto + Medio → prioridad operativa por cliente…")
+    _, _, contacto = guardar_contactos(out, config.PROCESSED_DIR)
+    log(f"contacto: {contacto['clientes_seleccionados']:,} seleccionados; "
+        f"{contacto['clientes_en_espera']:,} elegibles en espera")
+    reloj.etapa("informes", "Exportación de informes")
     # vista consolidada por usuario
     usr = (out.groupby("customer_id").agg(vehiculos_en_ventana=("vehicle_id", "size"), prob_max=("prob_churn", "max"),
                                           prob_media=("prob_churn", "mean"), algun_alto=("segmento", lambda s: (s == "Alto").any()))
@@ -184,7 +255,16 @@ def main(cfg_path: str, negocio_path: str, skip_train: bool):
           "## Top 20 features (SHAP global)", "", imp.head(20)[["nombre", "mean_abs_shap"]].round(2).to_markdown(index=False), "",
           f"## Población actual scoreada: {len(out):,} vehículos ({(out['poblacion_actual']=='en_ventana').sum():,} en ventana hoy, "
           f"{(out['poblacion_actual']=='entra_en_30_dias').sum():,} entran en 30 días); {out['tiene_turno_agendado'].sum():,} ya tienen turno agendado.", "",
-          out["segmento"].value_counts().rename("n").to_markdown(), ""]
+          out["segmento"].value_counts().rename("n").to_markdown(), "",
+          "## Segunda etapa: prioridad operativa de contacto", "",
+          f"- Alto + Medio: {contacto['candidatos']:,} vehículos; "
+          f"{contacto['clientes_identificados']:,} clientes identificados.",
+          f"- Clientes elegibles: {contacto['clientes_elegibles']:,}; "
+          f"seleccionados: {contacto['clientes_seleccionados']:,}; "
+          f"en espera: {contacto['clientes_en_espera']:,}.",
+          "- Política y auditoría: data/processed/contacto_resumen.json y candidatos_contacto.csv.",
+          "- La probabilidad y SHAP conservan el riesgo de abandono de la primera etapa. "
+          "Esta priorización no estima el efecto causal del contacto ni cuenta con una evaluación de retorno.", ""]
     (REP / "resumen.md").write_text("\n".join(md), encoding="utf8")
     log(f"listo. resumen en {REP / 'resumen.md'}")
 

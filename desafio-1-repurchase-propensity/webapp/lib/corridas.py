@@ -33,8 +33,10 @@ class Tarea:
 
 TAREAS = [
     Tarea("pipeline", "Pipeline completo", ("scripts/run_pipeline.py",), "~1,5 min",
-          "Datos crudos → ventanas → features → modelo → evaluación → scoring. Es lo primero que hay que correr: "
+          "Datos crudos → ventanas → modelo → scoring y SHAP → prioridad de contacto por cliente. Es lo primero que hay que correr: "
           "sin esto la demo no tiene datos.", necesita_pipeline=False),
+    Tarea("contacto", "Segunda etapa: priorizar contactos", ("scripts/run_contacto.py",), "~5 s",
+          "Reúne Alto + Medio, aplica las reglas operativas y consolida por cliente usando el scoring ya calculado."),
     Tarea("eda", "Análisis exploratorio", EDA, "~9 min",
           "Los 13 análisis exploratorios con su verificación independiente (informes, tablas y figuras)."),
     Tarea("notebooks", "Notebooks de evidencia", ("scripts/build_notebooks.py",), "~1 min",
@@ -116,8 +118,8 @@ def lanzar(clave: str) -> dict:
         raise RuntimeError("Ya hay una corrida en curso: esperá a que termine o cancelala.")
     t = POR_CLAVE[clave]
     d = dataset_activo()
-    if d["id"] != "original" and clave != "pipeline":
-        raise RuntimeError("Para los datasets cargados está disponible el Pipeline completo.")
+    if d["id"] != "original" and clave not in ("pipeline", "contacto"):
+        raise RuntimeError("Para los datasets cargados están disponibles el Pipeline completo y la segunda etapa.")
     if t.necesita_pipeline and not pipeline_corrido():
         raise RuntimeError("Primero hay que correr el pipeline completo.")
     carpeta = CORRIDAS / f"{time.strftime('%Y%m%d-%H%M%S')}_{clave}"

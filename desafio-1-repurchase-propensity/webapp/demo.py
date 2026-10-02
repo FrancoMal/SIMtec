@@ -1,48 +1,47 @@
-"""Webapp de demo · FIC III · Desafío 1 · Equipo SIMtec.
-
-Envoltura del trabajo del repo: un recorrido de demo que no calcula nada (lee las salidas ya generadas),
-el dashboard original del equipo tal cual, un navegador de resultados y un panel para recalcular en segundo plano.
-Abrir con abrir_demo.bat.
-"""
+"""Aplicación de retención de service: datos, entrenamiento, resultados y eficiencia."""
 import sys
 
 sys.dont_write_bytecode = True
 
-import streamlit as st  # noqa: E402
-from lib.datasets import selector
+import streamlit as st
+from lib import datasets as D
+from lib import corridas as C
+from lib.diseno import aplicar_estilo
 
-st.set_page_config(page_title="Retención de service Ranger · SIMtec", layout="wide")
+st.set_page_config(page_title="SIMtec | Retención de service", layout="wide", initial_sidebar_state="collapsed")
+aplicar_estilo()
 
-st.markdown("""
-<style>
-  .block-container {padding-top: 2.2rem;}
-  .tarjeta {background:#F3F3F3; border-radius:6px; padding:1.1rem 1.3rem; height:100%;}
-  .tarjeta-oscura {background:#00095B; color:white; border-radius:6px; padding:1.1rem 1.3rem; height:100%;}
-  .tarjeta-oscura * {color:white !important;}
-  .numero {font-size:2.6rem; line-height:1.1; color:#1700F3; font-weight:300;}
-  .tarjeta-oscura .numero {color:white;}
-  .etiqueta {font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:#1700F3; margin-bottom:0.4rem;}
-  .tarjeta-oscura .etiqueta {color:#B9BCBD !important;}
-  .paso {border-left:3px solid #1700F3; padding:0.2rem 0 0.2rem 0.9rem; margin-bottom:0.6rem;}
-  .frase {font-size:1.6rem; text-align:center; color:#00095B; margin-top:1.2rem;}
-  .frase b {color:#1700F3;}
-</style>
-""", unsafe_allow_html=True)
+# Las páginas solicitan cambios de conjunto antes de reconstruir el selector global.
+pendiente = st.session_state.pop("_dataset_pendiente", None)
+if pendiente:
+    D.seleccionar(pendiente)
+    st.session_state.pop("selector_dataset", None)
+    st.session_state["_dataset_guardado_aviso"] = D.activo()["nombre"]
 
-demo = [
-    st.Page("paginas/inicio.py", title="Inicio", default=True),
-    st.Page("paginas/bandeja.py", title="1 · Bandeja del concesionario"),
-    st.Page("paginas/caso.py", title="2 · Caso guiado"),
-    st.Page("paginas/resultados.py", title="3 · Resultados del modelo"),
+paginas = [
+    st.Page("paginas/datasets.py", title="Carga de datos", default=True),
+    st.Page("paginas/corridas.py", title="Entrenamiento"),
+    st.Page("paginas/contactos.py", title="Resultados"),
+    st.Page("paginas/eficiencia.py", title="Eficiencia del modelo"),
 ]
-explorar = [
-    st.Page("paginas/lista.py", title="Lista completa"),
-    st.Page("paginas/dashboard.py", title="Dashboard completo"),
-    st.Page("paginas/evidencia.py", title="Evidencia y tablas"),
-    st.Page("paginas/documentos.py", title="Documentos"),
-]
-operar = [st.Page("paginas/datasets.py", title="Datasets"),
-          st.Page("paginas/corridas.py", title="Corridas (recalcular)")]
+pagina = st.navigation(paginas, position="top")
+marca, conjunto = st.columns([1.35, 1], vertical_alignment="center")
+with marca:
+    st.markdown('<div class="marca">SIMtec<span>Retención de service</span></div>', unsafe_allow_html=True)
+with conjunto:
+    D.selector()
+st.divider()
+ejecucion = C.activa()
+if ejecucion and ejecucion.get("dataset_id", "original") == D.activo()["id"] and pagina.url_path in ("contactos", "eficiencia"):
+    st.info("Hay una ejecución en curso para este conjunto. Los resultados estarán disponibles cuando termine.")
+    st.page_link("paginas/corridas.py", label="Ver progreso del entrenamiento")
 
-selector()
-st.navigation({"Demo": demo, "Explorar": explorar, "Operar": operar}).run()
+    @st.fragment(run_every=3)
+    def esperar_resultados():
+        if not C.activa():
+            st.cache_data.clear()
+            st.rerun(scope="app")
+
+    esperar_resultados()
+    st.stop()
+pagina.run()

@@ -7,7 +7,7 @@ from lib.datasets import activo
 from lib.fuentes import SALIDAS_PIPELINE, etiqueta_fuente, miles, pct, requiere, scores
 from lib.listado import filtrar, tabla_completa
 
-st.title("Lista completa")
+st.title("Lista completa · análisis inicial")
 etiqueta_fuente()
 requiere(*SALIDAS_PIPELINE)
 s = scores()
@@ -19,6 +19,7 @@ st.write("Todos los vehículos del ranking, incluidos los que ya tienen turno o 
 st.caption("Fecha = fecha de scoring. Los grupos se asignan por posición en el ranking: "
            f"Alto es el {pct(porcentajes['Alto'])} de mayor riesgo, Medio el siguiente {pct(porcentajes['Medio'])} "
            f"y Bajo el {pct(porcentajes['Bajo'])} restante. Estos porcentajes no son umbrales de probabilidad.")
+st.page_link("paginas/contactos.py", label="Ver resultado de la segunda etapa: contactos priorizados")
 
 resumen = st.columns(4)
 resumen[0].metric("Vehículos totales", miles(len(s)))
@@ -34,7 +35,7 @@ adicionales = st.toggle("Mostrar datos adicionales", value=False, key="lista_adi
                         help="Prioridad, concesionario, fechas de mantenimiento, turno y aportes numéricos de SHAP.")
 tabla = tabla_completa(s, adicionales)
 vista = filtrar(tabla, grupo, buscar)
-st.caption(f"{miles(len(vista))} de {miles(len(tabla))} vehículos · ordenados por prioridad de contacto")
+st.caption(f"{miles(len(vista))} de {miles(len(tabla))} vehículos · ordenados por riesgo de abandono (etapa 1)")
 config = {
     "customer_id": st.column_config.TextColumn("customer_id"),
     "vehicle_id": st.column_config.TextColumn("vehicle_id"),

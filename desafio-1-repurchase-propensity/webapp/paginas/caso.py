@@ -3,8 +3,8 @@ Los motivos son los mismos tres drivers que entrega el modelo, expresados en uni
 import pandas as pd
 import streamlit as st
 
-from lib.fuentes import SALIDAS_PIPELINE, requiere, etiqueta_fuente, miles, pct, scores
-from lib.motivos import ACCION, motivo
+from lib.fuentes import SALIDAS_PIPELINE, requiere, etiqueta_fuente, miles, pct, scores, requiere_contactos, contactos
+from lib.motivos import motivo
 
 DEMO_VEHICULO = "e34f9e47700c8604"  # la Ranger 2019 de la presentación
 
@@ -61,11 +61,22 @@ seg = r["segmento"]
 c3.markdown(f"""<div class="tarjeta-oscura"><div class="etiqueta">Lo que pasa ahora</div>
 <div class="numero">{pct(r['prob_churn'])}</div>
 <p>de probabilidad de no volver al service en un concesionario oficial.</p>
-<p>Grupo <b>{seg}</b>. {ACCION.get(seg, '')}</p>
+<p>Grupo original <b>{seg}</b>.</p>
 <p>Le quedan {num(r['dias_restantes_horizonte'])} días de margen.</p></div>""", unsafe_allow_html=True)
 
-st.markdown('<div class="frase">El asesor no recibe un número: <b>recibe una conversación.</b></div>',
-            unsafe_allow_html=True)
+st.subheader("Decisión de la segunda etapa")
+requiere_contactos()
+candidato = contactos(candidatos=True)
+candidato = candidato[candidato["vehicle_id"] == vid]
+if candidato.empty:
+    st.info("Este vehículo pertenece al grupo Bajo y no entra en la segunda etapa.")
+else:
+    c = candidato.iloc[0]
+    situacion = "Seleccionado" if c["seleccionado"] else "En espera" if c["en_espera"] else c["estado_contacto"]
+    st.write(f"**{situacion}** · {c['motivos_operativos']}")
+    if not c["representante"] and c["estado_contacto"] != "Sin identificador":
+        st.caption("Otro vehículo representa a este cliente en la lista consolidada. Consultá sus vehículos asociados.")
+    st.caption(f"Vehículos del cliente en Alto + Medio: {c['vehiculos_cliente']}")
 
 with st.expander("Ver cómo lo expresa el modelo (detalle técnico)"):
     st.markdown("Los tres motivos son los drivers del modelo (contribuciones SHAP) para este vehículo, tal como "
