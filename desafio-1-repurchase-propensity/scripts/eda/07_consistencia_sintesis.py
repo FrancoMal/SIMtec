@@ -1,4 +1,4 @@
-"""Chequeos cortos de consistencia entre los seis informes de EDA (usados en docs/01_hallazgos_eda.md).
+"""Chequeos cortos de consistencia entre los seis informes de EDA (reports/eda/).
 
 Correr desde la carpeta del proyecto:
     PYTHONIOENCODING=utf8 PYTHONPATH=src .venv/Scripts/python.exe scripts/eda/07_consistencia_sintesis.py

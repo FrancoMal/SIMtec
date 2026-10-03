@@ -152,6 +152,7 @@ def main() -> None:
             if base != c:
                 d = d.replace("driver 1", c[7]).replace("driver_1", c[:8])
         lines.append(f"| `{c}` | {d} |")
+    OUT.parent.mkdir(parents=True, exist_ok=True)
     OUT.write_text("\n".join(lines) + "\n", encoding="utf8")
     print("escrito", OUT, f"({len(feats)} features documentadas, {sum(c not in ex.NOMBRES for c in feats)} sin nombre en castellano)")
 

@@ -71,8 +71,9 @@ if /i "%OPCION%"=="todo" (
 )
 if /i "%OPCION%"=="dashboard" (
     echo.
-    echo  Abriendo el dashboard. Cerrar esta ventana o Ctrl+C para detenerlo.
-    "%PY%" -m streamlit run app\app.py
+    echo  Abriendo la aplicacion web (http://localhost:8510). Cerrar esta ventana o Ctrl+C para detenerlo.
+    cd webapp
+    "..\%PY%" -m streamlit run app.py
     goto :fin
 )
 if /i "%OPCION%"=="resumen" (

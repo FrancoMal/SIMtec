@@ -21,17 +21,6 @@ def tabla_completa(scores: pd.DataFrame, adicionales: bool = False) -> pd.DataFr
     return tabla
 
 
-def filtrar(tabla: pd.DataFrame, grupo: str = "Todos", busqueda: str = "") -> pd.DataFrame:
-    resultado = tabla if grupo == "Todos" else tabla[tabla["grupo"] == grupo]
-    texto = busqueda.strip()
-    if texto:
-        coincide = (resultado["customer_id"].astype("string").str.contains(texto, case=False, regex=False, na=False)
-                    | resultado["vehicle_id"].astype("string").str.contains(texto, case=False, regex=False, na=False))
-        if "vehiculos_cliente" in resultado:
-            coincide |= resultado["vehiculos_cliente"].astype("string").str.contains(texto, case=False, regex=False, na=False)
-        resultado = resultado[coincide]
-    return resultado
-
 
 def tabla_contactos(contactos: pd.DataFrame, adicionales: bool = False) -> pd.DataFrame:
     """Conserva probabilidad y SHAP de la etapa 1 y el orden explícito de la etapa 2."""

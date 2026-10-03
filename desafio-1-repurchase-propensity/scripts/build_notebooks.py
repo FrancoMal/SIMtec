@@ -54,7 +54,7 @@ dentro de un turno, todo el parque Ranger). Los datos crudos son solo lectura; a
 `data/interim/` (generados por `src/repurchase/io.py`).
 
 El análisis completo, con scripts reproducibles y verificación independiente, está en `reports/eda/` y en
-`docs/01_hallazgos_eda.md`. Este notebook muestra lo esencial."""),
+`reports/eda/`. Este notebook muestra lo esencial."""),
         code(SETUP),
         md("## 1. Tamaño y grano de las tablas"),
         code('''sales = load_sales(); agenda = load_agenda(); appt = appointments(agenda)

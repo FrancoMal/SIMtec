@@ -90,7 +90,7 @@ def main():
     with tempfile.TemporaryDirectory(prefix="simtec-contactos-ui-") as temporal:
         carpeta = Path(temporal).resolve()
         with patch.object(D, "CATALOGO", carpeta / "catalogo"), patch.object(D, "original", return_value=original):
-            app = AppTest.from_file(str(PROYECTO / "webapp/demo.py"), default_timeout=60)
+            app = AppTest.from_file(str(PROYECTO / "webapp/app.py"), default_timeout=60)
             app.session_state["dataset_id"] = "original"
             app.run()
             comprobar_app(app)

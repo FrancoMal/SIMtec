@@ -93,7 +93,7 @@ with tempfile.TemporaryDirectory(prefix="chequeo-datasets-", dir=PROYECTO / ".ve
     registro.update(fin=registro["inicio"], codigo=0)
     estado.write_text(json.dumps(registro), encoding="utf8")
 
-    app = AppTest.from_file(str(PROYECTO / "webapp/demo.py"), default_timeout=60).run()
+    app = AppTest.from_file(str(PROYECTO / "webapp/app.py"), default_timeout=60).run()
     comprobar_app(app)
     app.switch_page("paginas/datasets.py").run()
     comprobar_app(app)

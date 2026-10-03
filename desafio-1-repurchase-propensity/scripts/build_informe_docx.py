@@ -248,12 +248,12 @@ def contenido() -> dict[str, str]:
 
     S["complementaria"] = "".join([
         P("En el .zip que acompaña este informe se adjuntan los entregables que no caben en el documento:"),
-        BUL("**Dataset analítico documentado y definición reproducible del target**: config/params.json, src/repurchase/ventanas.py, docs/01_hallazgos_eda.md y docs/02_decisiones_y_descartes.md."),
+        BUL("**Dataset analítico documentado y definición reproducible del target**: config/params.json, src/repurchase/ventanas.py y reports/eda/."),
         BUL("**Pipeline de features, modelo entrenado y evaluación temporal**: src/repurchase/, scripts/run_pipeline.py, data/models/ (modelo, calibrador, métricas), reports/modelo/ (resumen de la corrida, lift por decil, calibración, ROI, sensibilidad, ablaciones)."),
         BUL("**Explicación global e individual**: reports/figures/modelo/shap_global.png y los drivers por vehículo en el ranking."),
         BUL("**Ranking priorizado**: data/processed/scores_actuales.csv (30.504 vehículos con el output mínimo de la ficha) y la vista consolidada por usuario."),
-        BUL("**Propuesta de activación y demo**: app/app.py (dashboard Streamlit con bandeja, ficha por vehículo, vista por usuario y por concesionario) y docs/03_pitch_trials_day.md."),
-        BUL("**Evidencia**: reports/eda/ (seis análisis con verificación independiente), notebooks/ (tres notebooks ejecutados), reports/revision_cruzada/ (comparación con la solución independiente y su verificación)."),
+        BUL("**Propuesta de activación y demo**: webapp/app.py (aplicación Streamlit: carga de datos, entrenamiento, resultados de contacto y eficiencia del modelo)."),
+        BUL("**Evidencia**: reports/eda/ (seis análisis con verificación independiente) y notebooks/ (tres notebooks ejecutados)."),
         P("Figuras adicionales disponibles en reports/figures/: curvas del primer service de la cohorte 2024, precisión-recall, segmentos, distribución de intervalos, tasa de uso, estacionalidad, identidad y flotas, censura a la izquierda y snapshot de conectividad."),
     ])
 

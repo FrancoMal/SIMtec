@@ -117,8 +117,8 @@ while true; do
             ;;
         dashboard)
             echo
-            echo " Abriendo el dashboard. Ctrl+C para detenerlo."
-            "$PY" -m streamlit run app/app.py
+            echo " Abriendo la aplicacion web (http://localhost:8510). Ctrl+C para detenerlo."
+            (cd webapp && "../$PY" -m streamlit run app.py)
             pausa
             exit 0
             ;;
